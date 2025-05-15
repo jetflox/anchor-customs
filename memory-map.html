@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Map - Where It All Began</title>
+    <script src="/tailwindcss.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <!-- quicksand font from a local file -->
+    <link rel="stylesheet" href="/fonts/Quicksand-VariableFont.ttf" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              quicksand: ["Quicksand", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Styles that can't be easily replaced with Tailwind classes */
+      .mapboxgl-ctrl-geocoder {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none;
+      }
+
+      .compass-arrow {
+        width: 2px;
+        height: 16px;
+        background-color: #be185d;
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform-origin: bottom center;
+        transform: translateX(-50%);
+      }
+
+      /* Center indicator and compass styles that are difficult to replace */
+      .center-indicator {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body
+    class="text-gray-700 min-h-screen flex flex-col items-center justify-center font-quicksand pt-20"
+  >
+    <div class="container mx-auto max-w-7xl pb-20">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-12">
+        <!-- Map Container (Left on desktop, Top on mobile) -->
+        <div class="w-full md:w-3/5 order-1 max-h-screen bg-gray-100">
+          <div class="w-full mx-auto p-8 lg:px-20 xl:px-32">
+            <svg
+              id="memory-map-svg"
+              class="w-full h-auto shadow-xl shadow-black print:shadow-none"
+              viewBox="0 0 600 800"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <filter id="shadow" color-interpolation-filters="sRGB">
+                  <feDropShadow
+                    dx="2"
+                    dy="2"
+                    stdDeviation="4"
+                    flood-opacity="1"
+                  />
+                </filter>
+
+                <mask id="circleMask">
+                  <!-- White background (white parts are visible, black parts are invisible) -->
+                  <rect x="0" y="0" width="600" height="800" fill="white" />
+
+                  <!-- Black circle in the center (creates a transparent circle in the mask) -->
+                  <!-- Center the circle on the map area -->
+                  <circle
+                    cx="300"
+                    cy="310"
+                    r="220"
+                    fill="black"
+                    id="map-circle"
+                  />
+                </mask>
+              </defs>
+
+              <!-- Map background -->
+              <rect
+                x="0"
+                y="0"
+                width="600"
+                height="800"
+                fill="white"
+                id="poster-background"
+              />
+
+              <!-- Map will be inserted here -->
+              <image
+                id="map-image"
+                x="40"
+                y="40"
+                width="520"
+                height="520"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              <rect
+                x="40"
+                y="40"
+                width="520"
+                height="920"
+                fill="white"
+                mask="url(#circleMask)"
+                id="map-mask"
+                data-show-circle="true"
+              />
+              <rect
+                x="40"
+                y="580"
+                width="520"
+                height="20"
+                fill="white"
+                id="cover-map-image-bottom"
+              />
+              <!-- Border rectangle with inset shadow -->
+              <rect
+                id="poster-border"
+                x="20"
+                y="20"
+                width="560"
+                height="760"
+                fill="transparent"
+                stroke="#333"
+                stroke-width="2"
+                filter="url(#shadow)"
+                class="print:hidden"
+              />
+
+              <!-- Heart marker centered on the map -->
+              <svg
+                x="275"
+                y="275"
+                width="36"
+                height="30.7"
+                id="heart-marker"
+                viewBox="2 3 20 18.350000381469727"
+                opacity="0.85"
+              >
+                <g>
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    fill="#e11d48"
+                  ></path>
+                </g>
+              </svg>
+
+              <!-- Text elements -->
+              <text
+                id="names-text"
+                x="300"
+                y="620"
+                text-anchor="end"
+                font-size="72"
+                font-weight="normal"
+                font-family="'Amatic', sans-serif"
+                fill="#111111"
+                class="font-light"
+              ></text>
+              <!-- font-family="'Amatic', sans-serif" -->
+              <text
+                id="moment-text"
+                x="300"
+                y="660"
+                text-anchor="end"
+                font-size="18"
+                font-weight="normal"
+                text-transform="uppercase"
+                fill="#555555"
+                class="font-semibold"
+              ></text>
+              <text
+                id="location-text"
+                x="300"
+                y="690"
+                text-anchor="end"
+                font-size="18"
+                fill="#555555"
+                class="font-semibold"
+              ></text>
+              <text
+                id="date-text"
+                x="300"
+                y="720"
+                text-anchor="end"
+                font-size="18"
+                fill="#555555"
+                class="font-semibold"
+              ></text>
+            </svg>
+            <!-- Download Button -->
+            <div class="mt-6 text-center hidden">
+              <button
+                id="download-map-btn"
+                class="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-200 flex items-center justify-center mx-auto"
+              >
+                Preserve This Memory
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Controls (Right on desktop, Bottom on mobile) -->
+        <div class="w-full md:w-2/5 order-2 px-4 lg:px-8 xl:px-0">
+          <div class="bg-white h-full md:sticky md:top-5">
+            <div class="flex flex-col space-y-4">
+              <!-- Location Input -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Map Location</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="location-input"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                    placeholder="Where did you first meet?"
+                    readonly
+                  />
+                  <button
+                    id="select-location-btn"
+                    class="absolute right-2 top-2 text-rose-600 hover:text-rose-800"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Names Input -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Names</label
+                >
+                <input
+                  type="text"
+                  id="names-input"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                  placeholder="Emma & Noah"
+                />
+              </div>
+
+              <!-- Moment Text -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Moment</label
+                >
+                <input
+                  type="text"
+                  id="moment-input"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                  placeholder="First met at a coffee shop"
+                />
+              </div>
+
+              <!-- Custom Location Text -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Custom Location</label
+                >
+                <input
+                  type="text"
+                  id="custom-location-input"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                  placeholder="Chandni Chowk"
+                />
+              </div>
+
+              <!-- Date Text -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Date</label
+                >
+                <input
+                  type="text"
+                  id="date-input"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                  placeholder="April 25, 2023"
+                />
+              </div>
+
+              <!-- Map Style -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Map Style</label
+                >
+                <select
+                  id="map-style-select"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                >
+                  <!-- Will be populated by JavaScript -->
+                </select>
+              </div>
+
+              <!-- map shape -->
+              <!-- READ this when you want to enable this: -->
+              <!-- hidden class on parent div, disabled attribute on select -->
+              <div class="hidden">
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Map Shape</label
+                >
+                <select
+                  disabled
+                  id="map-shape-select"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                >
+                  <option value="rectangle">Rectangle</option>
+                  <option value="circle">Circle</option>
+                </select>
+              </div>
+
+              <!-- names font -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Names Font</label
+                >
+                <select
+                  id="names-font-select"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 font-montserrat tracking-wide"
+                >
+                  <option value="'Amatic', sans-serif">Amatic</option>
+                  <option value="'Wistania', cursive">Cursive</option>
+                  <option value="'Atma', sans-serif">Atma</option>
+                  <option value="'DMSerif', serif">DM Serif</option>
+                  <option value="'Fredericka', serif">Fred</option>
+                  <option value="'Ribeye', serif">Ribeye</option>
+                </select>
+              </div>
+
+              <!-- Names text font size slider -->
+              <div>
+                <label
+                  class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
+                  >Names Size</label
+                >
+                <input
+                  type="range"
+                  id="names-font-size-slider"
+                  min="16"
+                  max="128"
+                  value="32"
+                  class="w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="w-full my-16 text-center">Anchor Customs</footer>
+
+    <!-- Location Selection Modal -->
+    <div
+      id="location-modal"
+      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden"
+    >
+      <div class="bg-white rounded-lg w-full max-w-2xl p-6 relative">
+        <button
+          id="close-modal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <h2 class="text-xl font-medium mb-4 text-rose-700">Select Location</h2>
+
+        <div
+          id="geocoder"
+          class="w-full mb-4 border border-gray-300 rounded-md"
+        ></div>
+
+        <div
+          id="map-container"
+          class="w-full h-96 rounded-lg mb-4 relative"
+        ></div>
+
+        <div class="flex justify-between items-center">
+          <p class="text-sm text-gray-500 italic">
+            Center, direction and zoom level will be preserved in your keepsake
+          </p>
+          <button
+            id="confirm-location"
+            class="px-4 py-2 bg-rose-600 text-white rounded-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500"
+          >
+            Confirm Location
+          </button>
+        </div>
+      </div>
+    </div>
+    <style>
+      @font-face {
+        font-family: "Quicksand";
+        src: url("/fonts/Quicksand-VariableFont.ttf") format("truetype");
+        font-display: swap;
+      }
+      /* Wistania */
+      @font-face {
+        font-family: "Wistania";
+        src: url("/fonts/Wistania.ttf") format("truetype");
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Amatic";
+        src: url("/fonts/AmaticSC-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Atma";
+        src: url("/fonts/Atma-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "DMSerif";
+        src: url("/fonts/DMSerifText-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Fredericka";
+        src: url("/fonts/FrederickatheGreat-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Ribeye";
+        src: url("/fonts/Ribeye-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+    </style>
+
+    <script>
+      // Define custom marker URL
+      const customMarkerUrl = "https://exp.sm0.dev/heart-icon.png";
+
+      // SVG layout parameters - allowing for living adaptation
+      const svgParams = {
+        viewBox: { width: 600, height: 800 },
+        border: { margin: 0, thickness: 40, color: "#333", radius: 0 },
+        content: { padding: 70, mapHeight: 520 },
+        circle: { radius: 220 },
+        textLayout: { namesY: 640, momentY: 665, locationY: 685, dateY: 705 },
+      };
+
+      // Map styles array - customize as needed
+      const mapStyles = [
+        {
+          name: "Outdoors",
+          value: "mapbox://styles/shreshthmohan/cma2j7y1p00tf01s5ccjjamf9",
+        },
+        {
+          name: "Natural",
+          value: "mapbox://styles/shreshthmohan/cm9ya3dso00kk01s5cr341phz",
+        },
+
+        {
+          name: "Streets",
+          value: "mapbox://styles/shreshthmohan/cm9zgri1900lu01s5fz6z9p95",
+        },
+        {
+          name: "Minimal Light",
+          value: "mapbox://styles/shreshthmohan/cm9zepd0201m301r3aejw2uar",
+        },
+      ];
+
+      // Default to New York City
+      const defaultLocation = {
+        name: "NEW YORK CITY",
+        coordinates: [-74.006, 40.7128],
+        zoom: 12, // Default zoom level
+        bearing: 0, // Default bearing (north)
+      };
+
+      // Mapbox access token
+      mapboxgl.accessToken =
+        "pk.eyJ1Ijoic2hyZXNodGhtb2hhbiIsImEiOiJjbTg4c25wdGIwdm1vMmpxeGl6MGpxcHl0In0.8bDwQdF7raEKmHjkLA2AZw";
+
+      let selectedLocation = defaultLocation;
+      let map;
+      let geocoder;
+      let mapImage = document.getElementById("map-image");
+      let mapMask = document.getElementById("map-mask");
+      let heartMarker = document.getElementById("heart-marker");
+      let compassArrow; // Reference to the compass arrow element
+
+      // Apply SVG parameters to create an adaptive living structure
+      function applyLayoutParameters(mapShape = "rectangle") {
+        const svg = document.getElementById("memory-map-svg");
+        if (!svg) return;
+
+        // Set viewBox
+        svg.setAttribute(
+          "viewBox",
+          `0 0 ${svgParams.viewBox.width} ${svgParams.viewBox.height}`
+        );
+
+        // Get elements
+        const borderRect = document.getElementById("poster-border");
+        const mapImage = document.getElementById("map-image");
+        const heartMarker = document.getElementById("heart-marker");
+        const textElements = {
+          names: document.getElementById("names-text"),
+          moment: document.getElementById("moment-text"),
+          location: document.getElementById("location-text"),
+          date: document.getElementById("date-text"),
+        };
+
+        // Calculate dimensions - respecting the ecological relationships between elements
+        const borderWidth =
+          svgParams.viewBox.width - 2 * svgParams.border.margin;
+        const borderHeight =
+          svgParams.viewBox.height - 2 * svgParams.border.margin;
+        const contentX = svgParams.border.margin + svgParams.content.padding;
+        const contentY = svgParams.border.margin + svgParams.content.padding;
+        const contentWidth = borderWidth - 2 * svgParams.content.padding;
+        const centerX = svgParams.viewBox.width / 2;
+
+        const contextEndX = contentX + contentWidth;
+
+        // Apply to border
+        if (borderRect) {
+          borderRect.setAttribute("x", svgParams.border.margin);
+          borderRect.setAttribute("y", svgParams.border.margin);
+          borderRect.setAttribute("width", borderWidth);
+          borderRect.setAttribute("height", borderHeight);
+          borderRect.setAttribute("stroke-width", svgParams.border.thickness);
+          borderRect.setAttribute("stroke", svgParams.border.color);
+        }
+
+        // Apply to map
+        mapImage.setAttribute("x", contentX);
+        mapImage.setAttribute("y", contentY);
+        mapImage.setAttribute("width", contentWidth);
+        mapImage.setAttribute("height", svgParams.content.mapHeight);
+
+        // Text positioning
+        if (mapShape === "rectangle") {
+          textElements.names.setAttribute("x", contextEndX);
+          textElements.names.setAttribute("y", svgParams.textLayout.namesY);
+
+          textElements.moment.setAttribute("x", contextEndX);
+          textElements.moment.setAttribute("y", svgParams.textLayout.momentY);
+
+          textElements.location.setAttribute("x", contextEndX);
+          textElements.location.setAttribute(
+            "y",
+            svgParams.textLayout.locationY
+          );
+
+          textElements.date.setAttribute("x", contextEndX);
+          textElements.date.setAttribute("y", svgParams.textLayout.dateY);
+
+          // text-anchor=end for all text elements
+          textElements.names.setAttribute("text-anchor", "end");
+          textElements.moment.setAttribute("text-anchor", "end");
+          textElements.location.setAttribute("text-anchor", "end");
+          textElements.date.setAttribute("text-anchor", "end");
+
+          // hide any elements with data-show-circle="true"
+          document
+            .querySelectorAll("[data-show-circle='true']")
+            .forEach((el) => {
+              el.classList.add("hidden");
+            });
+        } else if (mapShape === "circle") {
+          textElements.names.setAttribute("x", centerX);
+          textElements.names.setAttribute(
+            "y",
+            svgParams.textLayout.namesY - 20
+          );
+
+          textElements.moment.setAttribute("x", centerX);
+          textElements.moment.setAttribute(
+            "y",
+            svgParams.textLayout.momentY - 10
+          );
+
+          textElements.location.setAttribute("x", centerX);
+          textElements.location.setAttribute(
+            "y",
+            svgParams.textLayout.locationY - 10
+          );
+
+          textElements.date.setAttribute("x", centerX);
+          textElements.date.setAttribute("y", svgParams.textLayout.dateY - 10);
+
+          // text-anchor=middle for all text elements
+          textElements.names.setAttribute("text-anchor", "middle");
+          textElements.moment.setAttribute("text-anchor", "middle");
+          textElements.location.setAttribute("text-anchor", "middle");
+          textElements.date.setAttribute("text-anchor", "middle");
+
+          // show any elements with data-show-circle="true", remove hidden class
+          document
+            .querySelectorAll("[data-show-circle='true']")
+            .forEach((el) => {
+              el.classList.remove("hidden");
+            });
+        }
+      }
+
+      // Populate map style select
+      const mapStyleSelect = document.getElementById("map-style-select");
+      mapStyles.forEach((style) => {
+        const option = document.createElement("option");
+        option.value = style.value;
+        option.textContent = style.name;
+        mapStyleSelect.appendChild(option);
+      });
+
+      // Initialize the map in the modal
+      function initMap() {
+        map = new mapboxgl.Map({
+          container: "map-container",
+          // default streets
+          style: "mapbox://styles/mapbox/streets-v12",
+          center: selectedLocation.coordinates,
+          zoom: selectedLocation.zoom,
+          bearing: selectedLocation.bearing, // Initialize with saved bearing
+        });
+
+        // Add navigation controls - allowing intuitive relationship with space
+        map.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+        // Add a scale to provide context and relationship to physical distance
+        map.addControl(
+          new mapboxgl.ScaleControl({
+            maxWidth: 100,
+            unit: "metric",
+          }),
+          "bottom-left"
+        );
+
+        // Add a visible indicator at the center of the map
+        const centerIndicator = document.createElement("div");
+        centerIndicator.className = "center-indicator";
+        centerIndicator.innerHTML = `
+                <div class="absolute top-1/2 left-1/2 pointer-events-none">
+                    <svg class="center-heart opacity-90 transform -translate-x-1/2 -translate-y-[100%]" width="20" height="20" viewBox="0 0 24 24" fill="#be185d" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+            `;
+        document.getElementById("map-container").appendChild(centerIndicator);
+
+        // Add compass indicator for bearing
+        const compassIndicator = document.createElement("div");
+        compassIndicator.className =
+          "absolute bottom-2.5 right-2.5 w-10 h-10 bg-white bg-opacity-80 rounded-full pointer-events-none z-10 flex items-center justify-center shadow";
+        compassIndicator.innerHTML = `
+                <div class="absolute text-sm top-0.5 left-1/2 transform -translate-x-1/2 text-rose-700 font-bold">N</div>
+                <div class="compass-arrow"></div>
+                <div class="absolute rounded-full w-2 h-2 bg-gray-400"></div>
+            `;
+        document.getElementById("map-container").appendChild(compassIndicator);
+
+        // Get reference to arrow for rotation
+        compassArrow = compassIndicator.querySelector(".compass-arrow");
+
+        // Initialize compass rotation based on current bearing
+        updateCompassDirection(selectedLocation.bearing);
+
+        // Listen for map movement to update coordinates, zoom level, and bearing
+        map.on("moveend", () => {
+          // Get the center point, zoom level, and bearing of the current map view
+          const center = map.getCenter();
+          const zoom = map.getZoom();
+          const bearing = map.getBearing();
+          const centerCoordinates = [center.lng, center.lat];
+
+          // Update selected location with all spatial properties
+          selectedLocation.coordinates = centerCoordinates;
+          selectedLocation.zoom = zoom;
+          selectedLocation.bearing = bearing;
+
+          // Update compass direction
+          updateCompassDirection(bearing);
+
+          // Log current spatial properties for reference
+          console.log("Current spatial settings:", {
+            zoom: zoom.toFixed(2),
+            bearing: bearing.toFixed(2),
+            coordinates: centerCoordinates,
+          });
+
+          // Reverse geocode to get location name
+          reverseGeocode(centerCoordinates);
+        });
+
+        // Listen for bearing changes specifically
+        map.on("rotate", () => {
+          const bearing = map.getBearing();
+          updateCompassDirection(bearing);
+          selectedLocation.bearing = bearing;
+        });
+      }
+
+      // Update compass indicator direction
+      function updateCompassDirection(bearing) {
+        if (compassArrow) {
+          // Rotate the compass arrow to match map bearing
+          // Subtract bearing from 0 to rotate in correct direction
+          // (north is 0, east is 90, etc.)
+          compassArrow.style.transform = `translateX(-50%) rotate(${-bearing}deg)`;
+        }
+      }
+
+      // Initialize the geocoder - separate function to respect natural sequence
+      function initGeocoder() {
+        // If geocoder already exists, don't create it again
+        if (geocoder) return;
+
+        geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          marker: false,
+          placeholder: "Search for your special place...",
+          zoom: 13, // Default zoom for geocoder results
+        });
+
+        // Now that the modal is visible, attach the geocoder to its container
+        document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
+
+        // When a search result is selected
+        geocoder.on("result", (e) => {
+          console.log("Geocoder result received:", e.result);
+
+          const result = e.result;
+          const coordinates = result.center;
+
+          // Update selected location with name and coordinates
+          // (zoom will be updated by the moveend event after flying)
+          selectedLocation.name = result.place_name;
+          selectedLocation.coordinates = coordinates;
+
+          // Fly to the location
+          map.flyTo({
+            center: coordinates,
+            zoom: 13, // Initial zoom for search results
+            essential: true,
+          });
+        });
+      }
+
+      // Reverse geocode to get place name from coordinates
+      function reverseGeocode(coordinates) {
+        const [lng, lat] = coordinates;
+        fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}&limit=1`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.features && data.features.length > 0) {
+              selectedLocation.name = data.features[0].place_name;
+
+              // Update location display in the modal if needed
+              const modalLocationElement = document.getElementById(
+                "modal-location-display"
+              );
+              if (modalLocationElement) {
+                modalLocationElement.textContent = selectedLocation.name;
+              }
+            }
+          })
+          .catch((error) =>
+            console.error("Error in reverse geocoding:", error)
+          );
+      }
+
+      // Generate the static map image WITHOUT the marker
+      function generateMapImage() {
+        const style = mapStyleSelect.value;
+        const width = 1107;
+        const height = 1280;
+        const zoom = selectedLocation.zoom || 15; // Use selected zoom or default to 15
+        const bearing = selectedLocation.bearing || 0; // Use selected bearing or default to 0
+        const [lng, lat] = selectedLocation.coordinates;
+
+        console.log("Generating map with settings:", {
+          zoom: zoom.toFixed(2),
+          bearing: bearing.toFixed(2),
+        });
+
+        // Generate static map URL WITHOUT marker
+        const staticMapUrl = `https://api.mapbox.com/styles/v1/${
+          style.split("mapbox://styles/")[1]
+        }/static/${lng},${lat},${zoom},${bearing}/${width}x${height}@2x?access_token=${
+          mapboxgl.accessToken
+        }`;
+
+        // Update image source
+        mapImage.setAttribute("href", staticMapUrl);
+
+        // Position the heart marker dynamically using layout parameters
+        const heartMarker = document.getElementById("heart-marker");
+
+        // Calculate heart position based on SVG parameters
+        const contentX = svgParams.border.margin + svgParams.content.padding;
+        const contentY = svgParams.border.margin + svgParams.content.padding;
+        const contentWidth =
+          svgParams.viewBox.width -
+          2 * svgParams.border.margin -
+          2 * svgParams.content.padding;
+
+        // markerDimensions
+        const markerWidth = document
+          .getElementById("heart-marker")
+          .getAttribute("width");
+        const markerHeight = document
+          .getElementById("heart-marker")
+          .getAttribute("height");
+
+        console.log("Marker dimensions:", { markerWidth, markerHeight });
+
+        const centerX = contentX + contentWidth / 2 - markerWidth / 2; // 15 is half the heart width
+        const centerY =
+          contentY + svgParams.content.mapHeight / 2 - markerHeight; // 15 is half the heart height
+
+        console.log("Heart marker position:", { centerX, centerY });
+
+        heartMarker.setAttribute("x", centerX.toString());
+        heartMarker.setAttribute("y", centerY.toString());
+      }
+
+      // Update SVG text
+      function updateSVGText() {
+        const namesText = document.getElementById("names-text");
+        const momentText = document.getElementById("moment-text");
+        const dateText = document.getElementById("date-text");
+        const locationText = document.getElementById("location-text");
+
+        namesText.textContent =
+          document.getElementById("names-input").value || "EMMA & NOAH";
+        momentText.textContent =
+          document.getElementById("moment-input").value || "ENGAGED";
+        dateText.textContent =
+          document.getElementById("date-input").value ||
+          "SUNDAY, APRIL 25 2023";
+        locationText.textContent =
+          document.getElementById("custom-location-input").value ||
+          selectedLocation.name;
+      }
+
+      // Update everything when any input changes
+      function updateEverything() {
+        generateMapImage();
+        updateSVGText();
+      }
+      async function downloadMap() {
+        try {
+          // Show loading state
+          const downloadBtn = document.getElementById("download-map-btn");
+          const originalBtnText = downloadBtn.innerHTML;
+          downloadBtn.innerHTML =
+            '<span class="animate-pulse">Preserving memory...</span>';
+          downloadBtn.disabled = true;
+
+          // Wait for next frame to ensure loading state is visible
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+
+          // Get the SVG element
+          const svgElement = document.getElementById("memory-map-svg");
+          const svgData = new XMLSerializer().serializeToString(svgElement);
+
+          // Create a Blob from the SVG data
+          const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
+          const url = URL.createObjectURL(svgBlob);
+
+          // Create a link to download the SVG directly
+          // This approach bypasses the canvas taint issues by offering the SVG itself
+          const downloadLink = document.createElement("a");
+
+          // Format filename with location and date if available
+          let locationText = selectedLocation.name.split(",")[0] || "MemoryMap";
+          locationText = locationText.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+
+          let dateText = document.getElementById("date-input").value || "";
+          dateText = dateText.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+
+          const filename = `MemoryMap_${locationText}_${dateText}.svg`;
+
+          downloadLink.download = filename;
+          downloadLink.href = url;
+          downloadLink.click();
+
+          // Clean up
+          URL.revokeObjectURL(url);
+
+          // Restore button state
+          downloadBtn.innerHTML = originalBtnText;
+          downloadBtn.disabled = false;
+
+          // Inform user about the SVG format
+          const notice = document.createElement("div");
+          notice.className = "text-sm text-gray-600 mt-2 text-center";
+          notice.textContent =
+            "Your memory has been preserved as an SVG image, which maintains perfect quality at any size.";
+          downloadBtn.parentNode.appendChild(notice);
+
+          // Remove the notice after 5 seconds
+          setTimeout(() => {
+            notice.style.transition = "opacity 1s";
+            notice.style.opacity = 0;
+            setTimeout(() => notice.remove(), 1000);
+          }, 5000);
+        } catch (error) {
+          console.error("Error generating image:", error);
+          alert("There was an error preserving your memory. Please try again.");
+
+          // Restore button even on error
+          const downloadBtn = document.getElementById("download-map-btn");
+          downloadBtn.innerHTML = "Preserve This Memory";
+          downloadBtn.disabled = false;
+        }
+      }
+
+      // Event Listeners
+      document.addEventListener("DOMContentLoaded", () => {
+        // Apply SVG layout parameters first
+        applyLayoutParameters("circle");
+
+        // Add event listener for download button
+        document
+          .getElementById("download-map-btn")
+          .addEventListener("click", downloadMap);
+
+        // Show modal when location button is clicked
+        document
+          .getElementById("select-location-btn")
+          .addEventListener("click", () => {
+            document
+              .getElementById("location-modal")
+              .classList.remove("hidden");
+
+            // Initialize map if it hasn't been initialized yet
+            if (!map) {
+              initMap();
+            } else {
+              // If map exists, ensure it's centered on the current selected location
+              // and has the correct bearing
+              map.flyTo({
+                center: selectedLocation.coordinates,
+                zoom: selectedLocation.zoom,
+                bearing: selectedLocation.bearing,
+                essential: true,
+              });
+            }
+
+            // Initialize geocoder AFTER modal is visible
+            // This respects the natural sequence
+            setTimeout(() => {
+              initGeocoder();
+            }, 100);
+          });
+
+        // Close modal
+        document.getElementById("close-modal").addEventListener("click", () => {
+          document.getElementById("location-modal").classList.add("hidden");
+        });
+
+        // Confirm location
+        document
+          .getElementById("confirm-location")
+          .addEventListener("click", () => {
+            document.getElementById("location-modal").classList.add("hidden");
+            document.getElementById("location-input").value =
+              selectedLocation.name;
+
+            // Log final selected location details
+            console.log("Selected location:", {
+              name: selectedLocation.name,
+              coordinates: selectedLocation.coordinates,
+              zoom: selectedLocation.zoom,
+              bearing: selectedLocation.bearing,
+            });
+
+            updateEverything();
+          });
+
+        // Update when style changes
+        document
+          .getElementById("map-style-select")
+          .addEventListener("change", updateEverything);
+
+        // Update when inputs change
+        document
+          .getElementById("names-input")
+          .addEventListener("input", updateSVGText);
+        document
+          .getElementById("moment-input")
+          .addEventListener("input", updateSVGText);
+        document
+          .getElementById("date-input")
+          .addEventListener("input", updateSVGText);
+        document
+          .getElementById("custom-location-input")
+          .addEventListener("input", updateSVGText);
+
+        // Map shape
+        const mapShapeSelect = document.getElementById("map-shape-select");
+
+        mapShapeSelect &&
+          mapShapeSelect.addEventListener("change", () => {
+            // get selected value
+            const shape = document.getElementById("map-shape-select").value;
+
+            applyLayoutParameters(shape);
+          });
+
+        // names font
+        document
+          .getElementById("names-font-select")
+          .addEventListener("change", () => {
+            // get selected value
+            const font = document.getElementById("names-font-select").value;
+
+            document
+              .getElementById("names-text")
+              .setAttribute("font-family", font);
+          });
+
+        // names font size
+        document
+          .getElementById("names-font-size-slider")
+          .addEventListener("input", () => {
+            // get selected value
+            const fontSize = document.getElementById(
+              "names-font-size-slider"
+            ).value;
+
+            document
+              .getElementById("names-text")
+              .setAttribute("font-size", fontSize);
+          });
+
+        // Initialize with default values
+        document.getElementById("location-input").value = selectedLocation.name;
+        updateEverything();
+      });
+    </script>
+  </body>
+</html>

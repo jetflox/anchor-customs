@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anchor Customs - Design System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "anchor-cream": "#EAE4D5",
+              "anchor-taupe": "#B6B09F",
+              "anchor-black": "#000000",
+              "anchor-white": "#F2F2F2",
+              "anchor-gold": "#F2D091",
+            },
+            fontFamily: {
+              display: ["Quicksand", "sans-serif"],
+              body: ["Quicksand", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Minimal custom styles only when necessary */
+      .product-card:hover .product-image {
+        transform: scale(1.03);
+        transition: transform 0.3s ease;
+      }
+
+      @font-face {
+        font-family: "Quicksand";
+        src: url("/fonts/Quicksand-VariableFont.ttf") format("truetype");
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body class="bg-anchor-white min-h-screen p-8">
+    <header class="max-w-6xl mx-auto mb-12">
+      <div class="flex items-center justify-center mb-6">
+        <div class="rounded-full w-20 h-20 flex items-center justify-center">
+          <img src="images/anchor-logo.png" alt="" />
+        </div>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-display font-bold text-center">
+        ANCHOR CUSTOMS
+      </h1>
+      <p
+        class="text-center text-anchor-taupe font-display tracking-widest mt-1"
+      >
+        DESIGN SYSTEM
+      </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto">
+      <!-- Typography Section -->
+      <section class="mb-16">
+        <h2
+          class="text-2xl font-display font-semibold mb-6 pb-2 border-b border-anchor-taupe"
+        >
+          Typography
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-display font-medium mb-4">
+              Display Font: Montserrat
+            </h3>
+            <div class="space-y-4">
+              <p class="font-display font-bold text-4xl">Bold Heading (700)</p>
+              <p class="font-display font-semibold text-3xl">
+                Semibold Heading (600)
+              </p>
+              <p class="font-display font-medium text-2xl">
+                Medium Heading (500)
+              </p>
+              <p class="font-display text-xl">Regular Heading (400)</p>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-display font-medium mb-4">
+              Body Font: Poppins
+            </h3>
+            <div class="space-y-4">
+              <p class="font-body font-medium text-lg">Medium Body (500)</p>
+              <p class="font-body text-base">Regular Body (400)</p>
+              <p class="font-body font-light text-sm">Light Body (300)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color Palette Section -->
+      <section class="mb-16">
+        <h2
+          class="text-2xl font-display font-semibold mb-6 pb-2 border-b border-anchor-taupe"
+        >
+          Color Palette
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div class="flex flex-col">
+            <div class="h-24 bg-anchor-cream rounded-t-lg"></div>
+            <div class="bg-white p-2 rounded-b-lg shadow">
+              <p class="font-body font-medium">Cream</p>
+              <p class="font-mono text-xs">#EAE4D5</p>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="h-24 bg-anchor-taupe rounded-t-lg"></div>
+            <div class="bg-white p-2 rounded-b-lg shadow">
+              <p class="font-body font-medium">Taupe</p>
+              <p class="font-mono text-xs">#B6B09F</p>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="h-24 bg-anchor-black rounded-t-lg"></div>
+            <div class="bg-white p-2 rounded-b-lg shadow">
+              <p class="font-body font-medium">Black</p>
+              <p class="font-mono text-xs">#000000</p>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="h-24 bg-anchor-white rounded-t-lg border border-gray-200"
+            ></div>
+            <div class="bg-white p-2 rounded-b-lg shadow">
+              <p class="font-body font-medium">White</p>
+              <p class="font-mono text-xs">#F2F2F2</p>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="h-24 bg-anchor-gold rounded-t-lg"></div>
+            <div class="bg-white p-2 rounded-b-lg shadow">
+              <p class="font-body font-medium">Gold (Accent)</p>
+              <p class="font-mono text-xs">#F2D091</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Cards -->
+      <section class="mb-16">
+        <h2
+          class="text-2xl font-display font-semibold mb-6 pb-2 border-b border-anchor-taupe"
+        >
+          Product Cards
+        </h2>
+
+        <h3 class="text-xl font-display font-medium mb-4">
+          Standard Card Layout
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Product Card 1: Magazine -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-taupe px-3 py-1 text-xs font-display font-medium text-white z-10"
+              >
+                NEW
+              </div>
+              <img
+                src="images/polaroids.png"
+                alt="Custom Polaroids"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <a
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Retro Polaroids
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Set of 10 custom prints
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹899</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★</span
+                  ><span class="text-gray-300">★</span>
+                  <span class="text-xs font-body">(17)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-gold px-3 py-1 text-xs font-display font-medium z-10"
+              >
+                BESTSELLER
+              </div>
+              <img
+                src="/images/poster.png"
+                alt="Custom Magazine"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <button
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                >
+                  CUSTOMIZE NOW
+                </button>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Custom Magazine
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Personalized memory collection
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹1,499</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★</span
+                  ><span class="text-gray-300">★</span>
+                  <span class="text-xs font-body">(42)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Card 2: Scrapbook -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <img
+                src="/images/polaroid-collage.jpg"
+                alt="Custom Scrapbook"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <button
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                >
+                  CUSTOMIZE NOW
+                </button>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Memory Scrapbook
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Handcrafted with love
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹1,999</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★★</span>
+                  <span class="text-xs font-body">(38)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Card 3: Polaroids -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-taupe px-3 py-1 text-xs font-display font-medium text-white z-10"
+              >
+                NEW
+              </div>
+              <img
+                src="images/frame-1.png"
+                alt="Custom Polaroids"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <a
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Retro Polaroids
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Set of 10 custom prints
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹899</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★</span
+                  ><span class="text-gray-300">★</span>
+                  <span class="text-xs font-body">(17)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-taupe px-3 py-1 text-xs font-display font-medium text-white z-10"
+              >
+                NEW
+              </div>
+              <img
+                src="images/polaroids.png"
+                alt="Custom Polaroids"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <a
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Retro Polaroids
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Set of 10 custom prints
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹899</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★</span
+                  ><span class="text-gray-300">★</span>
+                  <span class="text-xs font-body">(17)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-taupe px-3 py-1 text-xs font-display font-medium text-white z-10"
+              >
+                NEW
+              </div>
+              <img
+                src="images/polaroids.png"
+                alt="Custom Polaroids"
+                class="product-image w-full h-full object-contain p-4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+              >
+                <a
+                  class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Customized Love Letter
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Set of 10 custom prints
+              </p>
+              <div class="flex justify-between items-center">
+                <p class="font-display font-bold">₹899</p>
+                <div class="flex items-center space-x-1">
+                  <span class="text-yellow-400">★★★★</span
+                  ><span class="text-gray-300">★</span>
+                  <span class="text-xs font-body">(17)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-display font-medium mb-4">
+          Alternative Card Layout
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <!-- Large Product Card 1: Hot Wheels -->
+          <div
+            class="product-card group bg-anchor-cream rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="flex flex-col md:flex-row">
+              <div class="relative overflow-hidden md:w-1/2">
+                <img
+                  src="/images/bow.png"
+                  alt="Custom Hot Wheels"
+                  class="product-image w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6 md:w-1/2 flex flex-col justify-center">
+                <div
+                  class="inline-block bg-white px-2 py-1 rounded-full text-xs font-display font-medium text-anchor-black mb-3"
+                >
+                  LIMITED EDITION
+                </div>
+                <h3 class="font-display font-bold text-xl mb-2">
+                  Collector's Hot Wheels
+                </h3>
+                <p class="text-anchor-black/80 font-body text-sm mb-4">
+                  Custom miniature car with personalized packaging
+                </p>
+                <p class="font-display font-bold text-2xl mb-4">₹2,499</p>
+                <button
+                  class="bg-anchor-black text-white font-display font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+                >
+                  CUSTOMIZE NOW
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Large Product Card 2: Frame -->
+          <div
+            class="product-card group bg-anchor-taupe rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="flex flex-col md:flex-row">
+              <div class="relative overflow-hidden md:w-1/2">
+                <img
+                  src="/images/song-coded.png"
+                  alt="Custom Frame"
+                  class="product-image w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6 md:w-1/2 flex flex-col justify-center">
+                <div
+                  class="inline-block bg-anchor-gold px-2 py-1 rounded-full text-xs font-display font-medium text-anchor-black mb-3"
+                >
+                  POPULAR CHOICE
+                </div>
+                <h3 class="font-display font-bold text-xl mb-2 text-white">
+                  Vintage Frame
+                </h3>
+                <p class="text-white/80 font-body text-sm mb-4">
+                  Handcrafted wooden frame with custom engraving
+                </p>
+                <p class="font-display font-bold text-2xl mb-4 text-white">
+                  ₹1,799
+                </p>
+                <button
+                  class="bg-white text-anchor-black font-display font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+                >
+                  CUSTOMIZE NOW
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons Section -->
+      <section class="mb-16">
+        <h2
+          class="text-2xl font-display font-semibold mb-6 pb-2 border-b border-anchor-taupe"
+        >
+          Buttons
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <h3 class="text-lg font-display font-medium mb-2">
+              Primary Buttons
+            </h3>
+            <div class="space-y-4">
+              <button
+                class="block w-full sm:w-auto bg-anchor-black text-white font-display font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+              >
+                PRIMARY BUTTON
+              </button>
+              <button
+                class="block w-full sm:w-auto bg-anchor-black text-white font-display font-medium px-6 py-3 rounded-full opacity-50 cursor-not-allowed"
+              >
+                DISABLED
+              </button>
+              <button
+                class="block w-full sm:w-auto bg-anchor-gold text-anchor-black font-display font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+              >
+                ACCENT BUTTON
+              </button>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <h3 class="text-lg font-display font-medium mb-2">
+              Secondary Buttons
+            </h3>
+            <div class="space-y-4">
+              <button
+                class="block w-full sm:w-auto bg-transparent border-2 border-anchor-black text-anchor-black font-display font-medium px-6 py-3 rounded-full hover:bg-anchor-black hover:text-white transition-colors"
+              >
+                SECONDARY BUTTON
+              </button>
+              <button
+                class="block w-full sm:w-auto bg-transparent border-2 border-anchor-taupe text-anchor-taupe font-display font-medium px-6 py-3 rounded-full hover:bg-anchor-taupe hover:text-white transition-colors"
+              >
+                ALTERNATE SECONDARY
+              </button>
+              <button
+                class="block w-full sm:w-auto bg-anchor-cream text-anchor-black font-display font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+              >
+                SUBTLE BUTTON
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="max-w-6xl mx-auto mt-12 pt-6 border-t border-anchor-taupe text-center text-sm text-anchor-taupe"
+    >
+      <p>ANCHOR CUSTOMS © 2025 | Design System</p>
+    </footer>
+
+    <script>
+      // Add any interactive JS here
+      document.addEventListener("DOMContentLoaded", () => {
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card) => {
+          card.addEventListener("mouseenter", () => {
+            // You could add additional animations or effects here
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
