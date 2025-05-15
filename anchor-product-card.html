@@ -45,7 +45,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Product Card 1: Custom Magazine -->
         <div
-          class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          class="product-carousel-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
         >
           <div class="relative overflow-hidden aspect-[4/5]">
             <!-- BESTSELLER badge -->
@@ -155,7 +155,7 @@
 
         <!-- Product Card 2: Memory Scrapbook -->
         <div
-          class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          class="product-carousel-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
         >
           <div class="relative overflow-hidden aspect-[4/5]">
             <!-- NEW badge -->
@@ -284,7 +284,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Initialize all product card carousels
-        const productCards = document.querySelectorAll(".product-card");
+        const productCards = document.querySelectorAll(
+          ".product-carousel-card"
+        );
 
         productCards.forEach((card) => {
           try {
