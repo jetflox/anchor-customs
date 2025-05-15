@@ -72,7 +72,7 @@
             <svg
               id="memory-map-svg"
               class="w-full h-auto shadow-xl shadow-black print:shadow-none"
-              viewBox="0 0 600 800"
+              viewBox="0 0 1050 1485"
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
@@ -87,14 +87,14 @@
 
                 <mask id="circleMask">
                   <!-- White background (white parts are visible, black parts are invisible) -->
-                  <rect x="0" y="0" width="600" height="800" fill="white" />
+                  <rect x="0" y="0" width="1050" height="1485" fill="white" />
 
                   <!-- Black circle in the center (creates a transparent circle in the mask) -->
                   <!-- Center the circle on the map area -->
                   <circle
-                    cx="300"
-                    cy="310"
-                    r="220"
+                    cx="525"
+                    cy="543"
+                    r="385"
                     fill="black"
                     id="map-circle"
                   />
@@ -105,8 +105,8 @@
               <rect
                 x="0"
                 y="0"
-                width="600"
-                height="800"
+                width="1050"
+                height="1485"
                 fill="white"
                 id="poster-background"
               />
@@ -116,15 +116,15 @@
                 id="map-image"
                 x="40"
                 y="40"
-                width="520"
-                height="520"
+                width="970"
+                height="970"
                 preserveAspectRatio="xMidYMid slice"
               />
               <rect
                 x="40"
                 y="40"
-                width="520"
-                height="920"
+                width="970"
+                height="1200"
                 fill="white"
                 mask="url(#circleMask)"
                 id="map-mask"
@@ -132,9 +132,9 @@
               />
               <rect
                 x="40"
-                y="580"
-                width="520"
-                height="20"
+                y="959"
+                width="970"
+                height="80"
                 fill="white"
                 id="cover-map-image-bottom"
               />
@@ -151,13 +151,12 @@
                 filter="url(#shadow)"
                 class="print:hidden"
               />
-
               <!-- Heart marker centered on the map -->
               <svg
                 x="275"
                 y="275"
-                width="36"
-                height="30.7"
+                width="54"
+                height="46"
                 id="heart-marker"
                 viewBox="2 3 20 18.350000381469727"
                 opacity="0.85"
@@ -169,14 +168,13 @@
                   ></path>
                 </g>
               </svg>
-
               <!-- Text elements -->
               <text
                 id="names-text"
                 x="300"
                 y="620"
                 text-anchor="end"
-                font-size="72"
+                font-size="128"
                 font-weight="normal"
                 font-family="'Amatic', sans-serif"
                 fill="#111111"
@@ -188,9 +186,10 @@
                 x="300"
                 y="660"
                 text-anchor="end"
-                font-size="18"
+                font-size="32"
                 font-weight="normal"
                 text-transform="uppercase"
+                font-family="'Quicksand', sans-serif"
                 fill="#555555"
                 class="font-semibold"
               ></text>
@@ -199,7 +198,8 @@
                 x="300"
                 y="690"
                 text-anchor="end"
-                font-size="18"
+                font-size="32"
+                font-family="'Quicksand', sans-serif"
                 fill="#555555"
                 class="font-semibold"
               ></text>
@@ -208,13 +208,14 @@
                 x="300"
                 y="720"
                 text-anchor="end"
-                font-size="18"
+                font-size="32"
+                font-family="'Quicksand', sans-serif"
                 fill="#555555"
                 class="font-semibold"
               ></text>
             </svg>
             <!-- Download Button -->
-            <div class="mt-6 text-center hidden">
+            <div class="mt-6 text-center">
               <button
                 id="download-map-btn"
                 class="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-200 flex items-center justify-center mx-auto"
@@ -303,7 +304,7 @@
               <div>
                 <label
                   class="block text-gray-700 mb-1 text-sm font-medium tracking-wider"
-                  >Custom Location</label
+                  >Location Text</label
                 >
                 <input
                   type="text"
@@ -388,8 +389,8 @@
                   type="range"
                   id="names-font-size-slider"
                   min="16"
-                  max="128"
-                  value="32"
+                  max="144"
+                  value="128"
                   class="w-full"
                 />
               </div>
@@ -498,11 +499,16 @@
 
       // SVG layout parameters - allowing for living adaptation
       const svgParams = {
-        viewBox: { width: 600, height: 800 },
+        viewBox: { width: 1050, height: 1485 }, // New A4 dimensions
         border: { margin: 0, thickness: 40, color: "#333", radius: 0 },
-        content: { padding: 70, mapHeight: 520 },
-        circle: { radius: 220 },
-        textLayout: { namesY: 640, momentY: 665, locationY: 685, dateY: 705 },
+        content: { padding: 122, mapHeight: 970 }, // Scaled proportionally
+        circle: { radius: 385, yOffset: 50 }, // Scaled proportionally
+        textLayout: {
+          namesY: 1188,
+          momentY: 1234,
+          locationY: 1269,
+          dateY: 1304,
+        },
       };
 
       // Map styles array - customize as needed
@@ -545,6 +551,36 @@
       let mapMask = document.getElementById("map-mask");
       let heartMarker = document.getElementById("heart-marker");
       let compassArrow; // Reference to the compass arrow element
+
+      // function to apply a dark theme to the svg
+      function toggleDarkTheme() {
+        // decide which colors to apply based on current fill color of poster background
+        const posterBackground = document.getElementById("poster-background");
+        const currentFill = posterBackground.getAttribute("fill");
+        // log current fill
+        console.log("Current fill: ", currentFill);
+        const isDark = currentFill === "#000";
+        const newBgFill = isDark ? "#fff" : "#000";
+        const newTextFill = isDark ? "#000" : "#fff";
+
+        posterBackground.setAttribute("fill", newBgFill);
+
+        const mapMask = document.getElementById("map-mask");
+        mapMask.setAttribute("fill", newBgFill);
+
+        // id="map-mask" fill black
+        const coverMapImageBottom = document.getElementById(
+          "cover-map-image-bottom"
+        );
+        coverMapImageBottom.setAttribute("fill", newBgFill);
+
+        // apply white text fills to all text elements inside the #memory-map-svg
+        const memoryMapSvg = document.getElementById("memory-map-svg");
+        const textElements = memoryMapSvg.querySelectorAll("text");
+        textElements.forEach((textElement) => {
+          textElement.setAttribute("fill", newTextFill);
+        });
+      }
 
       // Apply SVG parameters to create an adaptive living structure
       function applyLayoutParameters(mapShape = "rectangle") {
@@ -590,6 +626,10 @@
           borderRect.setAttribute("stroke", svgParams.border.color);
         }
 
+        const circleCenterX = contentX + contentWidth / 2;
+        const circleCenterY =
+          contentY + contentWidth / 2 + svgParams.circle.yOffset;
+
         // Apply to map
         mapImage.setAttribute("x", contentX);
         mapImage.setAttribute("y", contentY);
@@ -626,6 +666,11 @@
               el.classList.add("hidden");
             });
         } else if (mapShape === "circle") {
+          // id="map-circle"
+          const mapCircle = document.getElementById("map-circle");
+          mapCircle.setAttribute("cx", circleCenterX);
+          mapCircle.setAttribute("cy", circleCenterY);
+
           textElements.names.setAttribute("x", centerX);
           textElements.names.setAttribute(
             "y",
@@ -874,10 +919,16 @@
           .getAttribute("height");
 
         console.log("Marker dimensions:", { markerWidth, markerHeight });
+        // log contentX, contentY, contentWidth
+        console.log("Content dimensions:", {
+          contentX,
+          contentY,
+          contentWidth,
+        });
 
         const centerX = contentX + contentWidth / 2 - markerWidth / 2; // 15 is half the heart width
         const centerY =
-          contentY + svgParams.content.mapHeight / 2 - markerHeight; // 15 is half the heart height
+          contentY + contentWidth / 2 - markerHeight + svgParams.circle.yOffset; // 15 is half the heart height
 
         console.log("Heart marker position:", { centerX, centerY });
 
@@ -922,7 +973,7 @@
           await new Promise((resolve) => requestAnimationFrame(resolve));
 
           // Get the SVG element
-          const svgElement = document.getElementById("memory-map-svg");
+
           const svgData = new XMLSerializer().serializeToString(svgElement);
 
           // Create a Blob from the SVG data
@@ -966,6 +1017,170 @@
             notice.style.opacity = 0;
             setTimeout(() => notice.remove(), 1000);
           }, 5000);
+        } catch (error) {
+          console.error("Error generating image:", error);
+          alert("There was an error preserving your memory. Please try again.");
+
+          // Restore button even on error
+          const downloadBtn = document.getElementById("download-map-btn");
+          downloadBtn.innerHTML = "Preserve This Memory";
+          downloadBtn.disabled = false;
+        }
+      }
+      async function downloadMap() {
+        try {
+          // Show loading state
+          const downloadBtn = document.getElementById("download-map-btn");
+          const originalBtnText = downloadBtn.innerHTML;
+          downloadBtn.innerHTML =
+            '<span class="animate-pulse">Preserving memory...</span>';
+          downloadBtn.disabled = true;
+
+          // Wait for next frame to ensure loading state is visible
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+
+          // Get the SVG element
+          const svgElement = document.getElementById("memory-map-svg");
+
+          const borderElement = document.getElementById("poster-border");
+
+          // Store original border attributes
+          const originalBorderAttributes = {
+            display: borderElement.style.display,
+            visibility: borderElement.style.visibility,
+            filter: borderElement.getAttribute("filter"),
+            stroke: borderElement.getAttribute("stroke"),
+            strokeWidth: borderElement.getAttribute("stroke-width"),
+          };
+
+          // Temporarily hide the border for the download
+          // Using style.display = "none" is the most reliable way to make it disappear
+          borderElement.style.display = "none";
+          // Also remove the filter and stroke to ensure it doesn't appear at all
+          borderElement.removeAttribute("filter");
+          borderElement.setAttribute("stroke", "transparent");
+          borderElement.setAttribute("stroke-width", "0");
+
+          const defs =
+            svgElement.querySelector("defs") ||
+            svgElement.insertBefore(
+              document.createElementNS("http://www.w3.org/2000/svg", "defs"),
+              svgElement.firstChild
+            );
+
+          // Add font styles directly to the SVG
+          const styleElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "style"
+          );
+          styleElement.textContent = `
+      @font-face {
+        font-family: 'Amatic';
+        src: url('data:font/truetype;base64,${await fontToBase64(
+          "/fonts/AmaticSC-Regular.ttf"
+        )}') format('truetype');
+      }
+      @font-face {
+        font-family: 'Wistania';
+        src: url('data:font/truetype;base64,${await fontToBase64(
+          "/fonts/Wistania.ttf"
+        )}') format('truetype');
+      }
+
+        @font-face {
+        font-family: 'Quicksand';
+        src: url('data:font/truetype;base64,${await fontToBase64(
+          "/fonts/Quicksand-VariableFont.ttf"
+        )}' format('truetype');
+  font-display: swap;
+      }
+      @font-face {
+  font-family: "Atma";
+  src: url('data:font/truetype;base64,${await fontToBase64(
+    "/fonts/Atma-Regular.ttf"
+  )}') format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "DMSerif";
+  src: url('data:font/truetype;base64,${await fontToBase64(
+    "/fonts/DMSerifText-Regular.ttf"
+  )}') format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fredericka";
+  src: url('data:font/truetype;base64,${await fontToBase64(
+    "/fonts/FrederickatheGreat-Regular.ttf"
+  )}') format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ribeye";
+  src: url('data:font/truetype;base64,${await fontToBase64(
+    "/fonts/Ribeye-Regular.ttf"
+  )}') format("truetype");
+  font-display: swap;
+}
+   
+   
+    `;
+          defs.appendChild(styleElement);
+          const svgData = new XMLSerializer().serializeToString(svgElement);
+
+          // Create a Blob from the SVG data
+          const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
+          const url = URL.createObjectURL(svgBlob);
+
+          // Create a link to download the SVG directly
+          // This approach bypasses the canvas taint issues by offering the SVG itself
+          const downloadLink = document.createElement("a");
+
+          // Format filename with location and date if available
+          let locationText = selectedLocation.name.split(",")[0] || "MemoryMap";
+          locationText = locationText.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+
+          let dateText = document.getElementById("date-input").value || "";
+          dateText = dateText.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+
+          const filename = `MemoryMap_${locationText}_${dateText}.svg`;
+
+          downloadLink.download = filename;
+          downloadLink.href = url;
+          downloadLink.click();
+
+          // Clean up
+          URL.revokeObjectURL(url);
+
+          // IMPORTANT: Restore the border to its original state
+          if (originalBorderAttributes.display) {
+            borderElement.style.display = originalBorderAttributes.display;
+          } else {
+            borderElement.style.display = ""; // Reset to default
+          }
+
+          if (originalBorderAttributes.visibility) {
+            borderElement.style.visibility =
+              originalBorderAttributes.visibility;
+          }
+
+          // Restore attributes
+          borderElement.setAttribute(
+            "filter",
+            originalBorderAttributes.filter || "url(#shadow)"
+          );
+          borderElement.setAttribute(
+            "stroke",
+            originalBorderAttributes.stroke || "#333"
+          );
+          borderElement.setAttribute(
+            "stroke-width",
+            originalBorderAttributes.strokeWidth || "2"
+          );
+
+          // Restore button state
+          downloadBtn.innerHTML = originalBtnText;
+          downloadBtn.disabled = false;
         } catch (error) {
           console.error("Error generating image:", error);
           alert("There was an error preserving your memory. Please try again.");
@@ -1100,6 +1315,17 @@
         document.getElementById("location-input").value = selectedLocation.name;
         updateEverything();
       });
+
+      async function fontToBase64(fontUrl) {
+        const response = await fetch(fontUrl);
+        const blob = await response.blob();
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      }
     </script>
   </body>
 </html>
