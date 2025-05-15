@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anchor Customs - Product Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "anchor-cream": "#EAE4D5",
+              "anchor-taupe": "#B6B09F",
+              "anchor-black": "#000000",
+              "anchor-white": "#F2F2F2",
+              "anchor-gold": "#F2D091",
+            },
+            fontFamily: {
+              display: ["Quicksand", "sans-serif"],
+              body: ["Quicksand", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Font setup */
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+      /* Product card hover effects */
+      .product-card:hover .product-image {
+        transform: scale(1.03);
+        transition: transform 0.3s ease;
+      }
+
+      /* Image carousel styles */
+      .carousel-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+      }
+
+      .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: background-color 0.3s ease;
+      }
+
+      .carousel-button:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .carousel-button-prev {
+        left: 10px;
+      }
+
+      .carousel-button-next {
+        right: 10px;
+      }
+
+      .carousel-indicators {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        z-index: 10;
+      }
+
+      .carousel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: background-color 0.3s ease;
+      }
+
+      .carousel-indicator.active {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-anchor-white min-h-screen p-8 flex justify-center items-center"
+  >
+    <div class="max-w-sm mx-auto">
+      <!-- Product Card with Image Carousel -->
+      <div
+        class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+      >
+        <div class="carousel-container relative overflow-hidden aspect-[4/5]">
+          <div
+            class="absolute top-0 right-0 bg-anchor-gold px-3 py-1 text-xs font-display font-medium z-10"
+          >
+            BESTSELLER
+          </div>
+
+          <!-- Slide 1 -->
+          <div class="carousel-slide active">
+            <img
+              src="/images/bow.png"
+              alt="Custom Magazine"
+              class="product-image w-full h-full object-contain p-4"
+            />
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <img
+              src="/images/frame-1.png"
+              alt="Custom Magazine - Inside View"
+              class="product-image w-full h-full object-contain p-4"
+            />
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <img
+              src="/images/polaroid-collage.jpg"
+              alt="Custom Magazine - Example"
+              class="product-image w-full h-full object-contain p-4"
+            />
+          </div>
+
+          <!-- Carousel Controls -->
+          <button class="carousel-button carousel-button-prev">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button class="carousel-button carousel-button-next">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          <!-- Carousel Indicators -->
+          <div class="carousel-indicators">
+            <span class="carousel-indicator active" data-index="0"></span>
+            <span class="carousel-indicator" data-index="1"></span>
+            <span class="carousel-indicator" data-index="2"></span>
+          </div>
+
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
+          >
+            <button
+              class="bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+            >
+              CUSTOMIZE NOW
+            </button>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <h3 class="font-display font-semibold text-lg mb-1">
+            Custom Magazine
+          </h3>
+          <p class="text-anchor-taupe font-body text-sm mb-2">
+            Personalized memory collection
+          </p>
+          <div class="flex justify-between items-center">
+            <p class="font-display font-bold">₹1,499</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Small description below the card -->
+      <div class="mt-4 text-center">
+        <p class="text-anchor-taupe text-sm">
+          Using left/right arrows to navigate through product images
+        </p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize carousel
+        initializeCarousel();
+      });
+
+      function initializeCarousel() {
+        const carousel = document.querySelector(".carousel-container");
+        const slides = carousel.querySelectorAll(".carousel-slide");
+        const prevButton = carousel.querySelector(".carousel-button-prev");
+        const nextButton = carousel.querySelector(".carousel-button-next");
+        const indicators = carousel.querySelectorAll(".carousel-indicator");
+        let currentIndex = 0;
+
+        // Set up event listeners for the buttons
+        prevButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateCarousel();
+        });
+
+        nextButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel();
+        });
+
+        // Set up event listeners for the indicators
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            currentIndex = index;
+            updateCarousel();
+          });
+        });
+
+        // Function to update carousel display
+        function updateCarousel() {
+          slides.forEach((slide, index) => {
+            if (index === currentIndex) {
+              slide.classList.add("active");
+            } else {
+              slide.classList.remove("active");
+            }
+          });
+
+          indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+              indicator.classList.add("active");
+            } else {
+              indicator.classList.remove("active");
+            }
+          });
+        }
+
+        // Optional: Set up auto-rotation
+        /*
+        let interval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel();
+        }, 5000);
+        
+        carousel.addEventListener('mouseenter', () => {
+          clearInterval(interval);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+          interval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+          }, 5000);
+        });
+        */
+      }
+    </script>
+  </body>
+</html>
