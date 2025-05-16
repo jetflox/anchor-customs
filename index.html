@@ -67,26 +67,6 @@
               class="font-display font-medium text-anchor-black hover:text-anchor-taupe transition-colors duration-200"
               >Home</a
             >
-            <a
-              href="#"
-              class="font-display font-medium text-anchor-black hover:text-anchor-taupe transition-colors duration-200"
-              >Products</a
-            >
-            <a
-              href="#"
-              class="font-display font-medium text-anchor-black hover:text-anchor-taupe transition-colors duration-200"
-              >Custom Orders</a
-            >
-            <a
-              href="#"
-              class="font-display font-medium text-anchor-black hover:text-anchor-taupe transition-colors duration-200"
-              >About Us</a
-            >
-            <a
-              href="#"
-              class="bg-anchor-black text-white font-display font-medium px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors duration-200"
-              >Contact</a
-            >
           </div>
 
           <!-- Mobile menu button -->
@@ -281,6 +261,12 @@
                   src="images/prajakta finalll.png"
                   alt="Custom magazine and polaroids"
                 />
+                <a
+                  href="#home"
+                  class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-anchor-black hover:bg-gray-900 transition-colors"
+                >
+                  Home
+                </a>
               </div>
 
               <!-- Decorative floating elements -->
@@ -794,6 +780,139 @@
             </div>
           </div>
 
+          <div
+            class="product-carousel-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <!-- BESTSELLER badge -->
+              <div
+                class="absolute top-0 right-0 bg-anchor-gold px-3 py-1 text-xs font-display font-medium z-10"
+              >
+                BESTSELLER
+              </div>
+
+              <!-- Carousel slides -->
+              <div class="carousel relative h-full">
+                <!-- Slide 1 -->
+                <div
+                  class="slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-100"
+                >
+                  <img
+                    src="images/1.png"
+                    alt="Custom Magazine"
+                    class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+
+                <!-- Slide 2 -->
+                <div
+                  class="slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0"
+                >
+                  <img
+                    src="images/2.png"
+                    alt="Custom Magazine - Inside View"
+                    class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+
+                <!-- Slide 3 -->
+                <div
+                  class="slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0"
+                >
+                  <img
+                    src="images/5.png"
+                    alt="Custom Magazine - Inside View"
+                    class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <!-- Slide 4 -->
+                <div
+                  class="slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0"
+                >
+                  <img
+                    src="images/14.png"
+                    alt="Custom Magazine - Inside View"
+                    class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+              </div>
+
+              <!-- Carousel Controls -->
+              <button
+                class="prev-btn absolute top-1/2 left-3 -translate-y-1/2 bg-white/70 hover:bg-white/90 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-colors duration-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                class="next-btn absolute top-1/2 right-3 -translate-y-1/2 bg-white/70 hover:bg-white/90 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-colors duration-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              <!-- Carousel Indicators -->
+              <div
+                class="indicators absolute bottom-3 inset-x-0 flex justify-center gap-1.5 z-10"
+              >
+                <!-- Indicators will be generated by JavaScript -->
+              </div>
+
+              <!-- Hover overlay with button -->
+            </div>
+
+            <!-- Product info -->
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Customised Calendar
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                A customised calendar so that every date reminds you of them.
+              </p>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                  <p
+                    class="font-display font-bold text-anchor-taupe line-through"
+                  >
+                    ₹1,499
+                  </p>
+                  <p class="font-display font-bold text-anchor-black">₹1,299</p>
+                </div>
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
+              </div>
+            </div>
+          </div>
+
           <!-- Product Card 3: Polaroids -->
           <div
             class="product-carousel-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
@@ -991,14 +1110,14 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                
-              </div>
+              ></div>
             </div>
             <div class="p-4">
-              <h3 class="font-display font-semibold text-lg mb-1">Pinteresty Frame</Frame></h3>
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Pinteresty Frame
+              </h3>
               <p class="text-anchor-taupe font-body text-sm mb-2">
-               A frame thhat carries love and emotions. 
+                A frame tat carries love and emotions.
               </p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -1009,7 +1128,13 @@
                   </p>
                   <p class="font-display font-bold text-anchor-black">₹649</p>
                 </div>
-               
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
               </div>
             </div>
           </div>
@@ -1029,20 +1154,14 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
-             <div class="p-4">
-              <h3 class="font-display font-semibold text-lg mb-1">Heart-Shaped Polaroid Frame</h3>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Heart Shaped Polaroid Framesr
+              </h3>
               <p class="text-anchor-taupe font-body text-sm mb-2">
-                Store your love in form of polaroids but in a frame!
+                Store your memories in form of polaroids but in a frame!
               </p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -1051,9 +1170,15 @@
                   >
                     ₹799
                   </p>
-                  <p class="font-display font-bold text-anchor-black">₹649</p>
+                  <p class="font-display font-bold text-anchor-black">649</p>
                 </div>
-               
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
               </div>
             </div>
           </div>
@@ -1073,18 +1198,12 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
             <div class="p-4">
-              <h3 class="font-display font-semibold text-lg mb-1">Sticker Type Frame</h3>
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Sticker Type Frame
+              </h3>
               <p class="text-anchor-taupe font-body text-sm mb-2">
                 Aesthetiic brown paper background.
               </p>
@@ -1093,9 +1212,9 @@
                   <p
                     class="font-display font-bold text-anchor-taupe line-through"
                   >
-                    ₹2999
+                    ₹899
                   </p>
-                  <p class="font-display font-bold text-anchor-black">₹2,499</p>
+                  <p class="font-display font-bold text-anchor-black">₹749</p>
                 </div>
                 <a
                   class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
@@ -1123,19 +1242,13 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
             <div class="p-4">
-              <h3 class="font-semibold text-lg mb-1">Bow Frame</h3>
-              <p class="text-anchor-taupe font-body text-sm mb-2"></p>
+              <h3 class="font-display font-semibold text-lg mb-1">Bow Frame</h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Beige , Newspaper-Bow Frame.
+              </p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
                   <p
@@ -1145,6 +1258,13 @@
                   </p>
                   <p class="font-display font-bold text-anchor-black">₹749</p>
                 </div>
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
               </div>
             </div>
           </div>
@@ -1164,19 +1284,15 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
             <div class="p-4">
-              <h3 class="font-semibold text-lg mb-1">Song-Coded Frame</h3>
-              <p class="text-anchor-taupe font-body text-sm mb-2"></p>
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Song-Coded Frame
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Personalised with your favorite song.
+              </p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
                   <p
@@ -1186,6 +1302,13 @@
                   </p>
                   <p class="font-display font-bold text-anchor-black">₹749</p>
                 </div>
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
               </div>
             </div>
           </div>
@@ -1206,18 +1329,12 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
             <div class="p-4">
-              <h3 class="font-semibold text-lg mb-1">Polaroid Chain Frame</h3>
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Polaroid Chain Frame
+              </h3>
               <p class="text-anchor-taupe font-body text-sm mb-2"></p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -1228,6 +1345,13 @@
                   </p>
                   <p class="font-display font-bold text-anchor-black">₹749</p>
                 </div>
+                <a
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                >
+                  CUSTOMIZE NOW
+                </a>
               </div>
             </div>
           </div>
@@ -1247,15 +1371,7 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
-                <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                  href="https://ig.me/m/anchor.customs"
-                  target="_blank"
-                >
-                  CUSTOMIZE NOW
-                </a>
-              </div>
+              ></div>
             </div>
             <div class="p-4">
               <h3 class="font-semibold text-lg mb-1">Pop Grid Frame</h3>
@@ -1268,6 +1384,13 @@
                     ₹699
                   </p>
                   <p class="font-display font-bold text-anchor-black">₹499</p>
+                  <a
+                    class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
+                    href="https://ig.me/m/anchor.customs"
+                    target="_blank"
+                  >
+                    CUSTOMIZE NOW
+                  </a>
                 </div>
               </div>
             </div>
@@ -1288,9 +1411,23 @@
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-anchor-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4"
-              >
+              ></div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Customised Polaroids
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Customised Polaroids with cute messages written.
+              </p>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                  <p class="font-display font-bold text-anchor-black">
+                    ₹499 (includes 50 Polaroids)
+                  </p>
+                </div>
                 <a
-                  class="bg-anchor-cream text-anchor-black font-medium px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full"
                   href="https://ig.me/m/anchor.customs"
                   target="_blank"
                 >
@@ -1298,19 +1435,8 @@
                 </a>
               </div>
             </div>
-            <div class="p-4">
-              <h3 class="font-semibold text-lg mb-1">
-                Customised Polaroids (with cute mssages)
-              </h3>
-              <p class="text-anchor-taupe font-body text-sm mb-2"></p>
-              <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                  <p class="font-display font-bold text-anchor-black">
-                    ₹499 (For 50 Polaroids)
-                  </p>
-                </div>
-              </div>
-            </div>
+
+            >
           </div>
         </div>
       </section>
@@ -1391,102 +1517,8 @@
           </div>
 
           <!-- Column 2: Products -->
-          <div>
-            <h3 class="font-display font-semibold text-xl mb-4">Products</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Custom Magazines</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Memory Scrapbooks</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Posters</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Custom Frames</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Hot Wheels</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Polaroids</a
-                >
-              </li>
-            </ul>
-          </div>
 
           <!-- Column 3: Quick Links -->
-          <div>
-            <h3 class="font-display font-semibold text-xl mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >About Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >FAQ</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Shipping & Delivery</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Returns Policy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Terms & Conditions</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-anchor-white/80 hover:text-white transition-colors"
-                  >Privacy Policy</a
-                >
-              </li>
-            </ul>
-          </div>
 
           <!-- Column 4: Contact -->
           <div>
@@ -1512,7 +1544,7 @@
                 <a
                   href="mailto:hello@anchorcustoms.com"
                   class="text-anchor-white/80 hover:text-white transition-colors"
-                  >hello@anchorcustoms.com</a
+                  >anchorcustoms1@gmail.com</a
                 >
               </li>
               <li class="flex items-center">
@@ -1533,7 +1565,7 @@
                 <a
                   href="tel:+919876543210"
                   class="text-anchor-white/80 hover:text-white transition-colors"
-                  >+91 98765 43210</a
+                  >+91 9650039371</a
                 >
               </li>
             </ul>
