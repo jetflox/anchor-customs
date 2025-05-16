@@ -190,12 +190,12 @@
               class="flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
             >
               <a
-                href="#"
+                href="#trending"
                 class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-anchor-black hover:bg-gray-900 transition-colors"
               >
-                Browse Products
+                Browse Trending
               </a>
-              <a
+              <!-- <a
                 href="#"
                 class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full bg-anchor-white hover:bg-gray-100 transition-colors"
               >
@@ -212,7 +212,7 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-              </a>
+              </a> -->
             </div>
 
             <!-- Trust badges -->
@@ -314,7 +314,7 @@
       </div>
     </section>
     <main class="max-w-6xl mx-auto px-4">
-      <section class="mb-24">
+      <section class="mb-24" id="trending">
         <h2
           class="text-2xl font-semibold mb-6 pb-2 border-b border-anchor-taupe"
         >
@@ -327,7 +327,7 @@
           <div
             class="product-card group bg-anchor-cream rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
           >
-            <div class="flex flex-col md:flex-row">
+            <div class="flex flex-col md:flex-row h-full">
               <div class="relative overflow-hidden md:w-1/2">
                 <img
                   src="/images/hamper.jpg"
@@ -346,11 +346,14 @@
                   it includes one of our most loved products.
                 </p>
                 <p class="font-bold text-2xl mb-4">₹2,499</p>
-                <button
-                  class="bg-anchor-black text-white font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+                <a
+                  class="bg-anchor-black text-white text-center font-medium px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors"
+                  href="https://ig.me/m/anchor.customs"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   CUSTOMIZE NOW
-                </button>
+                </a>
               </div>
             </div>
           </div>
