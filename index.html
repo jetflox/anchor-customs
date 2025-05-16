@@ -23,12 +23,20 @@
             },
             fontFamily: {
               display: ["Quicksand", "sans-serif"],
+              amatic: ["Amatic", "sans-serif"],
               body: ["Quicksand", "sans-serif"],
             },
           },
         },
       };
     </script>
+    <style>
+      @font-face {
+        font-family: "Amatic";
+        src: url("/fonts/AmaticSC-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+    </style>
   </head>
   <body class="bg-anchor-white min-h-screen font-body">
     <!-- Navigation -->
@@ -272,26 +280,20 @@
               <div class="bg-white p-3 rounded-lg shadow-lg transform rotate-2">
                 <img
                   class="w-full h-auto rounded"
-                  src="https://via.placeholder.com/600x700/f8f8f8/333333?text=Anchor+Customs"
+                  src="images/magazine 1 (6).png"
                   alt="Custom magazine and polaroids"
                 />
               </div>
 
               <!-- Decorative floating elements -->
-              <div
-                class="absolute -bottom-10 -left-8 bg-anchor-gold p-2 rounded shadow-md transform -rotate-6 w-24 h-24 flex items-center justify-center"
-              >
-                <img
-                  class="w-full h-auto"
-                  src="https://via.placeholder.com/100/ffffff/333333?text=Polaroid"
-                  alt="Polaroid"
-                />
-              </div>
 
               <div
-                class="absolute -top-12 -right-4 bg-white p-2 rounded shadow-md transform rotate-12 w-32 h-16 flex items-center justify-center"
+                class="absolute -top-12 -right-4 bg-white p-2 rounded shadow-md transform rotate-12 w-32 flex items-center justify-center"
               >
-                <span class="font-display font-bold text-sm">MEMORIES</span>
+                <span class="font-amatic font-bold text-sm"
+                  >YOUR ONE PLACE TO FIND AESTHETIC GIFTS FOR YOUR LOVED
+                  ONES❤️</span
+                >
               </div>
             </div>
           </div>
@@ -1180,8 +1182,6 @@
             </div>
           </div>
         </div>
-
-        <h3 class="text-xl font-medium mb-4">Alternative Card Layout</h3>
       </section>
     </main>
 
