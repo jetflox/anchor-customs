@@ -3,9 +3,1238 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Hamper - Custom Gifting Service | Anchor Customs</title>
+    <!-- Import Quicksand font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "anchor-cream": "#EAE4D5",
+              "anchor-taupe": "#B6B09F",
+              "anchor-black": "#000000",
+              "anchor-white": "#F2F2F2",
+              "anchor-gold": "#F2D091",
+            },
+            fontFamily: {
+              display: ["Quicksand", "sans-serif"],
+              amatic: ["Amatic", "sans-serif"],
+              body: ["Quicksand", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @font-face {
+        font-family: "Amatic";
+        src: url("/fonts/AmaticSC-Regular.ttf") format("truetype");
+        font-display: swap;
+      }
+      body {
+        font-family: "Quicksand", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+    </style>
   </head>
-  <body>
-    hamper
+  <body class="bg-anchor-white min-h-screen font-body">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <!-- Logo and brand name -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div class="w-10 h-10 flex items-center justify-center mr-2">
+                <img
+                  src="images/anchor-logo.png"
+                  alt="Anchor Customs Logo"
+                  class="rounded-full"
+                />
+              </div>
+              <span
+                class="font-display font-bold text-xl tracking-wide text-anchor-black"
+                >ANCHOR CUSTOMS</span
+              >
+            </a>
+          </div>
+
+          <!-- Breadcrumb -->
+          <div
+            class="hidden md:flex items-center space-x-2 text-sm text-anchor-taupe"
+          >
+            <a
+              href="index.html"
+              class="hover:text-anchor-black transition-colors"
+              >Home</a
+            >
+            <span>/</span>
+            <span class="text-anchor-black font-medium">Hamper</span>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="flex items-center md:hidden">
+            <button
+              id="mobile-menu-button"
+              class="p-2 rounded-md text-anchor-black hover:bg-anchor-cream focus:outline-none focus:ring-2 focus:ring-inset focus:ring-anchor-taupe transition duration-200"
+            >
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Product Page Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+        <!-- Product Images -->
+        <div class="mb-8 lg:mb-0">
+          <!-- Main Image Carousel -->
+          <div
+            class="relative bg-white rounded-lg shadow-lg overflow-hidden mb-4"
+          >
+            <div class="aspect-square relative">
+              <!-- Main carousel container -->
+              <div class="carousel-container h-full">
+                <!-- Image Slide -->
+                <div
+                  class="carousel-slide active absolute inset-0 transition-opacity duration-500 ease-in-out opacity-100"
+                >
+                  <img
+                    src="images/hamper.jpg"
+                    alt="Anchor Customs Hamper - Complete Set"
+                    class="w-full h-full object-contain p-6"
+                  />
+                </div>
+
+                <!-- Detail Image Slide -->
+                <div
+                  class="carousel-slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0"
+                >
+                  <img
+                    src="images/finalest.png"
+                    alt="Hamper Contents Detail View"
+                    class="w-full h-full object-contain p-6"
+                  />
+                </div>
+
+                <!-- Video Slide -->
+                <div
+                  class="carousel-slide absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0"
+                >
+                  <div
+                    class="w-full h-full flex items-center justify-center p-6"
+                  >
+                    <video
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      class="max-w-full max-h-full object-contain"
+                    >
+                      <source src="images/hamper 2.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation Arrows -->
+              <button
+                id="prev-btn"
+                class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-colors duration-300 z-10"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              <button
+                id="next-btn"
+                class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-colors duration-300 z-10"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              <!-- Popular Badge -->
+              <div
+                class="absolute top-4 right-4 bg-anchor-gold px-3 py-1 rounded-full text-sm font-display font-medium text-anchor-black shadow-md"
+              >
+                MOST POPULAR
+              </div>
+            </div>
+
+            <!-- Thumbnail Navigation -->
+            <div class="flex space-x-2 p-4 bg-gray-50">
+              <button
+                class="thumbnail-btn active w-16 h-16 rounded-lg overflow-hidden border-2 border-anchor-gold"
+                data-slide="0"
+              >
+                <img
+                  src="images/hamper.jpg"
+                  alt="Hamper Main"
+                  class="w-full h-full object-cover"
+                />
+              </button>
+              <button
+                class="thumbnail-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-transparent hover:border-anchor-taupe transition-colors"
+                data-slide="1"
+              >
+                <img
+                  src="images/finalest.png"
+                  alt="Hamper Details"
+                  class="w-full h-full object-cover"
+                />
+              </button>
+              <button
+                class="thumbnail-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-transparent hover:border-anchor-taupe transition-colors bg-gray-200 flex items-center justify-center"
+                data-slide="2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-6 h-6 text-gray-600"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h6m-3-3v6m3 5H9l3-3-3-3"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Information -->
+        <div class="lg:pl-8">
+          <!-- Product Title and Price -->
+          <div class="mb-6">
+            <h1 class="text-3xl font-display font-bold text-anchor-black mb-2">
+              Hamper
+            </h1>
+            <p class="text-lg text-anchor-taupe mb-4">
+              The ultimate custom gift collection
+            </p>
+
+            <!-- Price -->
+            <div class="flex items-center space-x-3 mb-4">
+              <span class="text-3xl font-display font-bold text-anchor-black"
+                >₹2,499</span
+              >
+              <span class="text-xl font-display text-anchor-taupe line-through"
+                >₹2,999</span
+              >
+              <span
+                class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium"
+                >Save ₹500</span
+              >
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap gap-4 mb-6">
+              <div class="flex items-center text-sm text-anchor-taupe">
+                <svg
+                  class="h-4 w-4 text-anchor-gold mr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                Handcrafted
+              </div>
+              <div class="flex items-center text-sm text-anchor-taupe">
+                <svg
+                  class="h-4 w-4 text-anchor-gold mr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                2 weeks delivery
+              </div>
+              <div class="flex items-center text-sm text-anchor-taupe">
+                <svg
+                  class="h-4 w-4 text-anchor-gold mr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+                100% Customizable
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Description -->
+          <div class="mb-8">
+            <h2 class="text-xl font-display font-semibold mb-4">
+              What's Included
+            </h2>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <div
+                  class="w-2 h-2 bg-anchor-gold rounded-full mt-2 mr-3 flex-shrink-0"
+                ></div>
+                <div>
+                  <span class="font-medium">Custom Magazine</span>
+                  <p class="text-sm text-anchor-taupe">
+                    12 pages, 24 sides of personalized content capturing your
+                    memories
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-2 h-2 bg-anchor-gold rounded-full mt-2 mr-3 flex-shrink-0"
+                ></div>
+                <div>
+                  <span class="font-medium">Two Custom Frames</span>
+                  <p class="text-sm text-anchor-taupe">
+                    One A4 size frame and one 5x7 inches frame with your photos
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-2 h-2 bg-anchor-gold rounded-full mt-2 mr-3 flex-shrink-0"
+                ></div>
+                <div>
+                  <span class="font-medium">Personalized Note</span>
+                  <p class="text-sm text-anchor-taupe">
+                    A heartfelt handwritten note customized just for your loved
+                    one
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-2 h-2 bg-anchor-gold rounded-full mt-2 mr-3 flex-shrink-0"
+                ></div>
+                <div>
+                  <span class="font-medium">Custom Hot Wheels</span>
+                  <p class="text-sm text-anchor-taupe">
+                    A personalized toy car to add a fun element to your gift
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Specifications -->
+          <div class="mb-8">
+            <h2 class="text-xl font-display font-semibold mb-4">
+              Specifications
+            </h2>
+            <div class="bg-anchor-cream rounded-lg p-4 space-y-2">
+              <div class="flex justify-between">
+                <span class="text-anchor-taupe">Dimensions:</span>
+                <span class="font-medium">A4 Size Package</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-anchor-taupe">Materials:</span>
+                <span class="font-medium">Premium Printed Paper</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-anchor-taupe">Delivery Time:</span>
+                <span class="font-medium">2 Weeks</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-anchor-taupe">Customization:</span>
+                <span class="font-medium">100% Personalized</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customization Section -->
+          <div class="mb-8">
+            <h2 class="text-xl font-display font-semibold mb-4">
+              Customization Options
+            </h2>
+            <div class="bg-white rounded-lg border border-anchor-cream p-6">
+              <p class="text-anchor-taupe mb-4">
+                Make this hamper truly unique by customizing every element to
+                tell your story:
+              </p>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-center">
+                  <svg
+                    class="h-4 w-4 text-anchor-gold mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Choose your photos for the magazine and frames
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="h-4 w-4 text-anchor-gold mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Personalize the magazine content and stories
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="h-4 w-4 text-anchor-gold mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Write your own heartfelt message for the note
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="h-4 w-4 text-anchor-gold mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Select colors and themes that match your style
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    class="h-4 w-4 text-anchor-gold mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Customize the Hot Wheels with names or special details
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="mb-8">
+            <a
+              href="https://ig.me/m/anchor.customs"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full bg-anchor-black text-white font-display font-semibold px-8 py-4 rounded-full hover:bg-gray-900 transition-colors duration-300 flex items-center justify-center text-lg"
+            >
+              CUSTOMIZE YOUR HAMPER NOW
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+            <p class="text-center text-sm text-anchor-taupe mt-3">
+              Chat with us on Instagram to start customizing your perfect hamper
+            </p>
+          </div>
+
+          <!-- Additional Info -->
+          <div class="border-t border-anchor-cream pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+              <div>
+                <svg
+                  class="h-8 w-8 text-anchor-gold mx-auto mb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <h3 class="font-medium text-sm">Fast Processing</h3>
+                <p class="text-xs text-anchor-taupe">Ready in 2 weeks</p>
+              </div>
+              <div>
+                <svg
+                  class="h-8 w-8 text-anchor-gold mx-auto mb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+                <h3 class="font-medium text-sm">Made with Love</h3>
+                <p class="text-xs text-anchor-taupe">Handcrafted quality</p>
+              </div>
+              <div>
+                <svg
+                  class="h-8 w-8 text-anchor-gold mx-auto mb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <h3 class="font-medium text-sm">Quality Guaranteed</h3>
+                <p class="text-xs text-anchor-taupe">Premium materials</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Reviews Section -->
+      <section class="mt-16 mb-16">
+        <h2
+          class="text-2xl font-display font-bold text-anchor-black mb-8 text-center"
+        >
+          What Our Customers Say
+        </h2>
+
+        <!-- Overall Rating -->
+        <div class="text-center mb-8">
+          <div class="flex items-center justify-center mb-2">
+            <div class="flex text-yellow-400 text-2xl">
+              <span>★★★★★</span>
+            </div>
+            <span class="ml-2 text-xl font-display font-semibold">4.9</span>
+            <span class="ml-1 text-anchor-taupe">(127 reviews)</span>
+          </div>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Review 1 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-gold rounded-full flex items-center justify-center text-anchor-black font-bold text-sm"
+              >
+                P
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">Priya Sharma</h4>
+                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+              </div>
+            </div>
+
+            <p class="text-anchor-black text-sm mb-3">
+              "Absolutely loved this hamper! My boyfriend was so surprised and
+              emotional when he saw our memories turned into a beautiful
+              magazine. The frames are perfect quality and the Hot Wheels was
+              such a cute touch!"
+            </p>
+
+            <!-- Review Images -->
+            <div class="mb-3">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="aspect-square rounded-lg overflow-hidden">
+                  <img
+                    src="images/13.png"
+                    alt="Customer photo of hamper contents"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    onclick="openImageModal(this.src)"
+                  />
+                </div>
+                <div class="aspect-square rounded-lg overflow-hidden">
+                  <img
+                    src="images/1.png"
+                    alt="Customer photo showing magazine quality"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    onclick="openImageModal(this.src)"
+                  />
+                </div>
+              </div>
+              <p class="text-xs text-anchor-taupe mt-2 text-center">
+                Click images to view full size
+              </p>
+            </div>
+
+            <p class="text-xs text-anchor-taupe">Purchased for: Anniversary</p>
+          </div>
+
+          <!-- Review 2 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-taupe rounded-full flex items-center justify-center text-white font-bold text-sm"
+              >
+                R
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">Rahul Gupta</h4>
+                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-anchor-black text-sm mb-3">
+              "Best gift I've ever given! The team at Anchor Customs understood
+              exactly what I wanted. The magazine quality is amazing and my
+              girlfriend still keeps it on her bedside table. Worth every
+              penny!"
+            </p>
+            <p class="text-xs text-anchor-taupe">Purchased for: Birthday</p>
+          </div>
+
+          <!-- Review 3 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-gold rounded-full flex items-center justify-center text-anchor-black font-bold text-sm"
+              >
+                S
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">Sneha Patel</h4>
+                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-anchor-black text-sm mb-3">
+              "The attention to detail is incredible! They captured our story
+              perfectly in the magazine. The personalized note made me cry happy
+              tears. Delivery was exactly on time as promised."
+            </p>
+            <p class="text-xs text-anchor-taupe">
+              Purchased for: Valentine's Day
+            </p>
+          </div>
+
+          <!-- Review 4 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-taupe rounded-full flex items-center justify-center text-white font-bold text-sm"
+              >
+                A
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">Arjun Singh</h4>
+                <div class="flex text-yellow-400 text-sm">★★★★☆</div>
+              </div>
+            </div>
+            <p class="text-anchor-black text-sm mb-3">
+              "Great concept and execution! My sister loved the hamper for her
+              graduation. Only suggestion would be faster delivery, but the
+              quality makes up for it. Will definitely order again!"
+            </p>
+            <p class="text-xs text-anchor-taupe">Purchased for: Graduation</p>
+          </div>
+
+          <!-- Review 5 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-gold rounded-full flex items-center justify-center text-anchor-black font-bold text-sm"
+              >
+                M
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">Meera Joshi</h4>
+                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-anchor-black text-sm mb-3">
+              "This hamper saved my anniversary! I was running out of gift ideas
+              and this was perfect. The customization process was so easy
+              through Instagram. Highly recommended!"
+            </p>
+            <p class="text-xs text-anchor-taupe">Purchased for: Anniversary</p>
+          </div>
+
+          <!-- Review 6 -->
+          <div
+            class="bg-white rounded-lg border border-anchor-cream p-6 shadow-sm"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-anchor-taupe rounded-full flex items-center justify-center text-white font-bold text-sm"
+              >
+                K
+              </div>
+              <div class="ml-3">
+                <h4 class="font-display font-semibold text-sm">
+                  Kavya Agarwal
+                </h4>
+                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-anchor-black text-sm mb-3">
+              "The magazine is like a professional publication! My long-distance
+              boyfriend was so touched. The frames are beautifully made and the
+              packaging was gorgeous too."
+            </p>
+            <p class="text-xs text-anchor-taupe">
+              Purchased for: Long Distance Relationship
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Products Section -->
+      <section class="mt-16 mb-16">
+        <h2
+          class="text-2xl font-display font-bold text-anchor-black mb-8 text-center"
+        >
+          You Might Also Like
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Related Product 1: Magazine -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-gold px-3 py-1 text-xs font-display font-medium z-10"
+              >
+                BESTSELLER
+              </div>
+              <img
+                src="images/magazine.png"
+                alt="Customised Magazine"
+                class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Customised Magazine
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                A 12 pages 24 sides magazine.
+              </p>
+              <div class="flex items-center gap-2 mb-3">
+                <p class="font-display font-bold text-anchor-black">₹999</p>
+              </div>
+              <a
+                class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full text-center hover:bg-anchor-gold transition duration-300"
+                href="https://ig.me/m/anchor.customs"
+                target="_blank"
+              >
+                CUSTOMIZE NOW
+              </a>
+            </div>
+          </div>
+
+          <!-- Related Product 2: Frame -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <div
+                class="absolute top-0 right-0 bg-anchor-taupe px-3 py-1 text-xs font-medium text-white z-10"
+              >
+                NEW
+              </div>
+              <img
+                src="images/my safe place 3.png"
+                alt="Frame it Slay it"
+                class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Frame it Slay it
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                Beautiful custom frames for your memories.
+              </p>
+              <div class="flex items-center gap-2 mb-3">
+                <p
+                  class="font-display font-bold text-anchor-taupe line-through"
+                >
+                  ₹999
+                </p>
+                <p class="font-display font-bold text-anchor-black">₹849</p>
+              </div>
+              <a
+                class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full text-center hover:bg-anchor-gold transition duration-300"
+                href="https://ig.me/m/anchor.customs"
+                target="_blank"
+              >
+                CUSTOMIZE NOW
+              </a>
+            </div>
+          </div>
+
+          <!-- Related Product 3: Scrapbook -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <img
+                src="images/scrapboooksample.png"
+                alt="Scrapbook"
+                class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">Scrapbook</h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                A Memory Book.
+              </p>
+              <div class="flex items-center gap-2 mb-3">
+                <p
+                  class="font-display font-bold text-anchor-taupe line-through"
+                >
+                  ₹1,499
+                </p>
+                <p class="font-display font-bold text-anchor-black">₹1,299</p>
+              </div>
+              <a
+                class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full text-center hover:bg-anchor-gold transition duration-300"
+                href="https://ig.me/m/anchor.customs"
+                target="_blank"
+              >
+                CUSTOMIZE NOW
+              </a>
+            </div>
+          </div>
+
+          <!-- Related Product 4: Calendar -->
+          <div
+            class="product-card group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="relative overflow-hidden aspect-[4/5]">
+              <img
+                src="images/1.png"
+                alt="Customised Calendar"
+                class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-semibold text-lg mb-1">
+                Customised Calendar
+              </h3>
+              <p class="text-anchor-taupe font-body text-sm mb-2">
+                A customised calendar so that every date reminds you of them.
+              </p>
+              <div class="flex items-center gap-2 mb-3">
+                <p
+                  class="font-display font-bold text-anchor-taupe line-through"
+                >
+                  ₹1,499
+                </p>
+                <p class="font-display font-bold text-anchor-black">₹1,299</p>
+              </div>
+              <a
+                class="block bg-anchor-cream text-anchor-black font-display font-medium px-4 py-2 rounded-full text-center hover:bg-anchor-gold transition duration-300"
+                href="https://ig.me/m/anchor.customs"
+                target="_blank"
+              >
+                CUSTOMIZE NOW
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- View All Products Button -->
+        <div class="text-center mt-8">
+          <a
+            href="index.html#trending"
+            class="inline-flex items-center bg-anchor-black text-white font-display font-medium px-6 py-3 rounded-full hover:bg-gray-900 transition-colors duration-300"
+          >
+            View All Products
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ml-2 h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-anchor-black text-white pt-16 pb-8 mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Footer Main Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Column 1: Brand -->
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center mr-2 bg-anchor-gold rounded-full"
+              >
+                <span class="font-bold text-anchor-black">A</span>
+              </div>
+              <span class="font-display font-bold text-xl tracking-wide"
+                >ANCHOR CUSTOMS</span
+              >
+            </div>
+            <p class="text-anchor-white/80 text-sm max-w-xs">
+              Personalizing your memories into custom keepsakes for couples,
+              families, and everyone in between.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="https://www.instagram.com/anchor.customs/"
+                class="text-white hover:text-anchor-gold transition-colors"
+              >
+                <svg
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 4: Contact -->
+          <div>
+            <h3 class="font-display font-semibold text-xl mb-4">
+              Get in Touch
+            </h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 mr-2 text-anchor-gold"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <div class="flex flex-col">
+                  <a
+                    href="tel:+919650039371"
+                    class="text-anchor-white/80 hover:text-white transition-colors"
+                  >
+                    +91 9650039371
+                  </a>
+                  <a
+                    href="tel:+917982363745"
+                    class="text-anchor-white/80 hover:text-white transition-colors"
+                  >
+                    +91 7982363745
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-sm text-anchor-white/60">
+              &copy; 2025 Anchor Customs. All rights reserved.
+            </p>
+            <div class="flex items-center space-x-4 mt-4 md:mt-0">
+              <a
+                href="#"
+                class="text-sm text-anchor-white/60 hover:text-white transition-colors"
+                >Terms</a
+              >
+              <a
+                href="#"
+                class="text-sm text-anchor-white/60 hover:text-white transition-colors"
+                >Privacy</a
+              >
+              <a
+                href="#"
+                class="text-sm text-anchor-white/60 hover:text-white transition-colors"
+                >Cookies</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Image Modal (add this before closing </body> tag) -->
+    <div
+      id="imageModal"
+      class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div class="relative max-w-4xl max-h-full">
+        <img
+          id="modalImage"
+          src=""
+          alt="Review image"
+          class="max-w-full max-h-full object-contain rounded-lg"
+        />
+        <button
+          onclick="closeImageModal()"
+          class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function openImageModal(imageSrc) {
+        document.getElementById("modalImage").src = imageSrc;
+        document.getElementById("imageModal").classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeImageModal() {
+        document.getElementById("imageModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside the image
+      document
+        .getElementById("imageModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeImageModal();
+          }
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeImageModal();
+        }
+      });
+    </script>
+
+    <!-- JavaScript for Carousel -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll(".carousel-slide");
+        const thumbnails = document.querySelectorAll(".thumbnail-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          // Hide all slides
+          slides.forEach((slide, i) => {
+            if (i === index) {
+              slide.classList.remove("opacity-0");
+              slide.classList.add("opacity-100");
+            } else {
+              slide.classList.remove("opacity-100");
+              slide.classList.add("opacity-0");
+            }
+          });
+
+          // Update thumbnail active state
+          thumbnails.forEach((thumb, i) => {
+            if (i === index) {
+              thumb.classList.add("active", "border-anchor-gold");
+              thumb.classList.remove("border-transparent");
+            } else {
+              thumb.classList.remove("active", "border-anchor-gold");
+              thumb.classList.add("border-transparent");
+            }
+          });
+
+          currentSlide = index;
+        }
+
+        // Thumbnail click handlers
+        thumbnails.forEach((thumb, index) => {
+          thumb.addEventListener("click", () => {
+            showSlide(index);
+          });
+        });
+
+        // Navigation button handlers
+        prevBtn.addEventListener("click", () => {
+          const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(newIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          const newIndex = (currentSlide + 1) % slides.length;
+          showSlide(newIndex);
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            prevBtn.click();
+          } else if (e.key === "ArrowRight") {
+            nextBtn.click();
+          }
+        });
+
+        // Auto-play (optional - uncomment if desired)
+        /*
+        setInterval(() => {
+          const newIndex = (currentSlide + 1) % slides.length;
+          showSlide(newIndex);
+        }, 5000);
+        */
+      });
+
+      // Mobile menu toggle (if needed)
+      document.addEventListener("DOMContentLoaded", () => {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
