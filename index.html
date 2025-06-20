@@ -37,59 +37,32 @@
         font-display: swap;
       }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   </head>
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Anchor Customs</title>
 
-      <!-- Add the Confetti Library -->
-      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <!-- Add the Confetti Library -->
 
-      <!-- Optional: little bit of styling -->
-      <style>
-        body {
-          font-family: "Poppins", sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: hsl(
-            25,
-            32%,
-            93%
-          ); /* light beige aesthetic background */
-        }
-      </style>
-    </head>
-    <body>
-      <!-- Your website content here -->
-      <h1 style="text-align: center; margin-top: 50px; color: #0b0701">
-        Welcome to Anchor Customs 🎉
-      </h1>
+  <!-- Optional: little bit of styling -->
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: hsl(
+        25,
+        32%,
+        93%
+      ); /* light beige aesthetic background */
+    }
+  </style>
 
-      <!-- Confetti Script -->
-      <script>
-        window.onload = function () {
-          confetti({
-            particleCount: 250,
-            spread: 80,
-            origin: { y: 0.6 },
-          });
+  <!-- Your website content here -->
 
-          // Repeat confetti after few seconds for extra fun (optional)
-          setTimeout(function () {
-            confetti({
-              particleCount: 150,
-              spread: 60,
-              origin: { y: 0.5 },
-            });
-          }, 2000);
-        };
-      </script>
-    </body>
-  </html>
+  <!-- Confetti Script -->
+
   <body class="bg-anchor-white min-h-screen font-body">
+    <p class="text-center py-4 text-[#0b0701]">Welcome to Anchor Customs 🎉</p>
     <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1546,6 +1519,24 @@
         </div>
       </div>
     </footer>
+    <script>
+      window.onload = function () {
+        confetti({
+          particleCount: 250,
+          spread: 80,
+          origin: { y: 0.6 },
+        });
+
+        // Repeat confetti after few seconds for extra fun (optional)
+        setTimeout(function () {
+          confetti({
+            particleCount: 150,
+            spread: 60,
+            origin: { y: 0.5 },
+          });
+        }, 2000);
+      };
+    </script>
 
     <script>
       // Mobile menu toggle
