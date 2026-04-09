@@ -1,0 +1,210 @@
+{
+  "products": [
+    {
+      "name": "Hamper",
+      "price": 3199,
+      "originalPrice": 2999,
+      "description": "it includes some of our most loved products.",
+      "badge": "BESTSELLER",
+      "link": "hamper.html",
+      "images": ["images/hamper.jpg", "images/finalest.png"],
+      "type": "product"
+    },
+    {
+      "name": "Mystery Box For HER",
+      "price": 3499,
+      "originalPrice": null,
+      "description": "it will include our most loved 5 products!",
+      "badge": null,
+      "link": "mysteryboxher.html",
+      "images": ["images/alloo3.png"],
+      "type": "product"
+    },
+    {
+      "name": "Mystery Box For HIM",
+      "price": 3499,
+      "originalPrice": null,
+      "description": "it will include our most loved 5 products!",
+      "badge": null,
+      "link": "MYSTERYBOXHIM.HTML",
+      "images": ["images/5.png"],
+      "type": "product"
+    },
+    {
+      "name": "Customised Magazine",
+      "price": 1200,
+      "originalPrice": null,
+      "description": "A 12 pages 24 sides magazine. Best way to capture your core memories.",
+      "badge": "BESTSELLER",
+      "link": "magazine.html",
+      "images": ["images/magazine.png"],
+      "type": "product"
+    },
+    {
+      "name": "Frame it Slay it",
+      "price": 849,
+      "originalPrice": 999,
+      "description": "A beautiful customised frame.",
+      "badge": "NEW",
+      "link": "frame1.html",
+      "images": ["images/my safe place 3.png"],
+      "type": "product"
+    },
+    {
+      "name": "Scrapbook",
+      "price": 1499,
+      "originalPrice": 1499,
+      "description": "A Memory Book.",
+      "badge": null,
+      "link": "scrapbook.html",
+      "images": ["images/scrapboooksample.png"],
+      "type": "product"
+    },
+    {
+      "name": "Customised Calendar",
+      "price": 1299,
+      "originalPrice": 1499,
+      "description": "A customised calendar so that every date reminds you of them.",
+      "badge": null,
+      "link": "calendar.html",
+      "images": ["images/calendar 1 st page.png"],
+      "type": "product"
+    },
+    {
+      "name": "Action Figures",
+      "price": 599,
+      "originalPrice": 799,
+      "description": "Mini Bricks cute action figures.",
+      "badge": null,
+      "link": null,
+      "images": ["images/action figure  (1).png"],
+      "type": "product"
+    },
+    {
+      "name": "Long Distance Frame",
+      "price": 699,
+      "originalPrice": 899,
+      "description": "For your long distance person.",
+      "badge": null,
+      "link": "longdistanceframe.html",
+      "images": ["images/long distance frame.png"],
+      "type": "product"
+    },
+    {
+      "name": "Pinteresty Frame",
+      "price": 649,
+      "originalPrice": 799,
+      "description": "A frame that carries love and emotions.",
+      "badge": null,
+      "link": "pinterestyframe.html",
+      "images": ["images/frame-1.png"],
+      "type": "product"
+    },
+    {
+      "name": "Heart Shaped Polaroid Frame",
+      "price": 649,
+      "originalPrice": 799,
+      "description": "Store your memories in form of polaroids but in a frame!",
+      "badge": null,
+      "link": "heartshaped.html",
+      "images": ["images/hello.png"],
+      "type": "product"
+    },
+    {
+      "name": "Sticker Type Frame",
+      "price": 699,
+      "originalPrice": 899,
+      "description": "Aesthetic brown paper background.",
+      "badge": null,
+      "link": "stickertype.html",
+      "images": ["images/sticker type frame.png"],
+      "type": "product"
+    },
+    {
+      "name": "Bow Frame",
+      "price": 699,
+      "originalPrice": 899,
+      "description": "Beige, Newspaper-Bow Frame.",
+      "badge": null,
+      "link": "bowframe.html",
+      "images": ["images/bow frame.png"],
+      "type": "product"
+    },
+    {
+      "name": "Song-Coded Frame",
+      "price": 699,
+      "originalPrice": 899,
+      "description": "Personalised with your favorite song.",
+      "badge": null,
+      "link": "songcoded.html",
+      "images": ["images/song-coded.png"],
+      "type": "product"
+    },
+    {
+      "name": "Pop Grid Frame",
+      "price": 549,
+      "originalPrice": 699,
+      "description": "A pop grid style customised frame.",
+      "badge": null,
+      "link": "popgrid.html",
+      "images": ["images/vishva frame stall.png"],
+      "type": "product"
+    },
+    {
+      "name": "Customised Polaroids",
+      "price": 499,
+      "originalPrice": null,
+      "description": "Customised Polaroids with cute messages written. Includes 40 polaroids.",
+      "badge": null,
+      "link": null,
+      "images": ["images/final polaroids site.png"],
+      "type": "product"
+    }
+  ],
+  "combos": [
+    {
+      "name": "Combo: Magazine + Pop Grid Frame",
+      "price": 1599,
+      "originalPrice": 1749,
+      "description": "A customized magazine and a pop grid frame!",
+      "link": "combo1.html",
+      "images": ["images/IMG-20250621-WA0104.jpg"],
+      "includes": ["Customised Magazine", "Pop Grid Frame"],
+      "savings": 150,
+      "type": "combo"
+    },
+    {
+      "name": "Combo: Magazine + Sticker Type Frame",
+      "price": 1799,
+      "originalPrice": 1899,
+      "description": "A customized magazine and a sticker type frame (or any of your choice).",
+      "link": "combo2.html",
+      "images": ["images/IMG-20250621-WA0105.jpg"],
+      "includes": ["Customised Magazine", "Sticker Type Frame"],
+      "savings": 100,
+      "type": "combo"
+    },
+    {
+      "name": "Combo: Magazine + Frame It Slay It",
+      "price": 1899,
+      "originalPrice": 2049,
+      "description": "A customized magazine and Frame It Slay It (or any of your choice).",
+      "link": "COMBO3.HTML",
+      "images": ["images/IMG-20250621-WA0102.jpg"],
+      "includes": ["Customised Magazine", "Frame it Slay it"],
+      "savings": 150,
+      "type": "combo"
+    },
+    {
+      "name": "Combo: Magazine + Hot Wheels",
+      "price": 1799,
+      "originalPrice": 1999,
+      "description": "A customized magazine and 2 hotwheels (can be different)!",
+      "link": "COMBO4.HTML",
+      "images": ["images/IMG-20250621-WA0106.jpg"],
+      "includes": ["Customised Magazine", "2 Hot Wheels"],
+      "savings": 200,
+      "type": "combo"
+    }
+  ]
+}
