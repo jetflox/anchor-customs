@@ -79,7 +79,7 @@ def chat():
     return jsonify({
         'response': response,
         'intent': intent,
-        'confidence': round(confidence, 3),
+        'confidence': round(float(confidence), 3),
     })
 
 
