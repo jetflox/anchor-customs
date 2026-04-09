@@ -112,6 +112,55 @@ class ProductSearchEngine:
         self.item_embeddings = self.model.encode(self.item_texts)
         print(f"Built search index with {len(self.item_texts)} items.")
 
+    def _detect_gender(self, query):
+        """
+        Detect if the query implies a gender preference.
+        Returns 'female', 'male', or None.
+        """
+        query_lower = query.lower()
+        female_keywords = [
+            'mom', 'mother', 'girlfriend', 'wife', 'sister', 'her',
+            'she', 'girl', 'woman', 'female', 'gf', 'bhabhi', 'aunt',
+            'aunty', 'grandmother', 'grandma', 'nani', 'dadi', 'maa',
+            'mummy', 'mumma',
+        ]
+        male_keywords = [
+            'dad', 'father', 'boyfriend', 'husband', 'brother', 'him',
+            'he', 'boy', 'man', 'male', 'bf', 'uncle', 'grandfather',
+            'grandpa', 'nana', 'dada', 'papa', 'daddy',
+        ]
+
+        has_female = any(kw in query_lower.split() or kw in query_lower for kw in female_keywords)
+        has_male = any(kw in query_lower.split() or kw in query_lower for kw in male_keywords)
+
+        if has_female and not has_male:
+            return 'female'
+        if has_male and not has_female:
+            return 'male'
+        return None
+
+    def _apply_gender_penalty(self, results, gender):
+        """
+        Penalize products that don't match the detected gender.
+        - If user wants female gift: penalize 'HIM' products, boost 'HER' products.
+        - If user wants male gift: penalize 'HER' products, boost 'HIM' products.
+        """
+        adjusted = []
+        for item, score in results:
+            name_lower = item['name'].lower()
+            if gender == 'female':
+                if 'him' in name_lower or 'his' in name_lower:
+                    score *= 0.1  # heavy penalty
+                elif 'her' in name_lower:
+                    score *= 1.5  # boost
+            elif gender == 'male':
+                if 'her' in name_lower:
+                    score *= 0.1  # heavy penalty
+                elif 'him' in name_lower or 'his' in name_lower:
+                    score *= 1.5  # boost
+            adjusted.append((item, score))
+        return adjusted
+
     def search(self, query, top_k=5, price_filters=None):
         """
         Search for products matching the query.
@@ -143,11 +192,17 @@ class ProductSearchEngine:
         # Compute similarity
         similarities = cosine_similarity(query_embedding, candidate_embeddings)[0]
 
-        # Sort by similarity or price if requested
+        # Build results
         results = []
         for idx, sim in zip(candidate_indices, similarities):
             results.append((self.all_items[idx], float(sim)))
 
+        # Apply gender-aware re-ranking
+        gender = self._detect_gender(query)
+        if gender:
+            results = self._apply_gender_penalty(results, gender)
+
+        # Sort
         if price_filters and price_filters.get('sort') == 'price_asc':
             results.sort(key=lambda x: x[0]['price'])
         elif price_filters and price_filters.get('sort') == 'price_desc':
