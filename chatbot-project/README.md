@@ -16,7 +16,7 @@ Open **Command Prompt** or **PowerShell**, then:
 
 ```bash
 # 1. Navigate to the project folder
-cd path\to\chatbot-project
+cd  C:\Users\bhoomi\Documents\GitHub\anchor-customs\chatbot-project
 
 # 2. Create a virtual environment
 python -m venv venv
@@ -39,7 +39,7 @@ python app.py
 Double-click **`run.bat`** or run:
 
 ```bash
-cd path\to\chatbot-project
+cd  C:\Users\bhoomi\Documents\GitHub\anchor-customs\chatbot-project
 venv\Scripts\activate
 python app.py
 ```
@@ -52,17 +52,17 @@ Once the server starts, open your browser and go to:
 
 ## Example Queries
 
-| You type | The bot does |
-|----------|-------------|
-| "hi" | Greets you |
-| "what can I buy under 500?" | Shows products under Rs.500 |
-| "show me frames" | Lists all frame products |
-| "tell me about the magazine" | Shows magazine details |
-| "do you have combos?" | Lists all combo deals |
-| "cheapest product" | Returns the lowest-priced item |
-| "gift for my boyfriend" | Suggests relevant products |
-| "what products do you have?" | Shows full catalog |
-| "how to order" | Explains the ordering process |
+| You type                     | The bot does                   |
+| ---------------------------- | ------------------------------ |
+| "hi"                         | Greets you                     |
+| "what can I buy under 500?"  | Shows products under Rs.500    |
+| "show me frames"             | Lists all frame products       |
+| "tell me about the magazine" | Shows magazine details         |
+| "do you have combos?"        | Lists all combo deals          |
+| "cheapest product"           | Returns the lowest-priced item |
+| "gift for my boyfriend"      | Suggests relevant products     |
+| "what products do you have?" | Shows full catalog             |
+| "how to order"               | Explains the ordering process  |
 
 ## Project Structure
 
@@ -90,30 +90,30 @@ chatbot-project/
 
 ## Tech Stack
 
-| Component | Technology | Size/Notes |
-|-----------|-----------|------------|
-| Language | Python 3.10+ | — |
-| AI Model | `all-MiniLM-L6-v2` | ~80MB, runs on CPU |
-| NLP | Sentence Transformers + Cosine Similarity | Semantic understanding |
-| Backend | Flask | Lightweight web server |
-| Frontend | HTML/CSS/JS | No build step needed |
+| Component | Technology                                | Size/Notes             |
+| --------- | ----------------------------------------- | ---------------------- |
+| Language  | Python 3.10+                              | —                      |
+| AI Model  | `all-MiniLM-L6-v2`                        | ~80MB, runs on CPU     |
+| NLP       | Sentence Transformers + Cosine Similarity | Semantic understanding |
+| Backend   | Flask                                     | Lightweight web server |
+| Frontend  | HTML/CSS/JS                               | No build step needed   |
 
 ## System Requirements
 
-| Spec | Minimum |
-|------|---------|
-| OS | Windows 10/11 |
-| RAM | 4 GB (8 GB recommended) |
-| CPU | Any x64 processor |
-| GPU | Not required |
+| Spec | Minimum                            |
+| ---- | ---------------------------------- |
+| OS   | Windows 10/11                      |
+| RAM  | 4 GB (8 GB recommended)            |
+| CPU  | Any x64 processor                  |
+| GPU  | Not required                       |
 | Disk | ~500 MB (for model + dependencies) |
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---------|-----|
-| `python` not recognized | Reinstall Python with "Add to PATH" checked |
-| `pip install` fails | Run `python -m pip install --upgrade pip` first |
-| Model download hangs | Check internet connection; the first download needs ~80MB |
-| Port 5000 in use | Change port in `app.py`: `app.run(port=5001)` |
-| Page won't load | Make sure you see "Anchor Customs Chatbot is running!" in the terminal |
+| Problem                 | Fix                                                                    |
+| ----------------------- | ---------------------------------------------------------------------- |
+| `python` not recognized | Reinstall Python with "Add to PATH" checked                            |
+| `pip install` fails     | Run `python -m pip install --upgrade pip` first                        |
+| Model download hangs    | Check internet connection; the first download needs ~80MB              |
+| Port 5000 in use        | Change port in `app.py`: `app.run(port=5001)`                          |
+| Page won't load         | Make sure you see "Anchor Customs Chatbot is running!" in the terminal |
