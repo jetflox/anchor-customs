@@ -51,25 +51,58 @@ class ProductSearchEngine:
             # Add category keywords
             name_lower = item['name'].lower()
             if 'frame' in name_lower:
-                text_parts.extend(['frame', 'photo frame', 'wall decor', 'gift frame'])
+                text_parts.extend(['frame', 'photo frame', 'wall decor', 'gift frame',
+                                   'gift for mom', 'gift for mother', 'gift for dad',
+                                   'gift for girlfriend', 'gift for boyfriend',
+                                   'gift for friend', 'gift for her', 'gift for him',
+                                   'birthday gift', 'anniversary gift'])
             if 'magazine' in name_lower:
-                text_parts.extend(['magazine', 'photo book', 'memory book', 'photos'])
-            if 'mystery' in name_lower:
-                text_parts.extend(['mystery', 'surprise', 'gift box', 'surprise box'])
+                text_parts.extend(['magazine', 'photo book', 'memory book', 'photos',
+                                   'gift for mom', 'gift for mother', 'gift for parents',
+                                   'gift for girlfriend', 'gift for boyfriend',
+                                   'gift for best friend', 'gift for wife', 'gift for husband',
+                                   'birthday gift', 'anniversary gift', 'valentine gift'])
+            if 'mystery' in name_lower and 'her' in name_lower:
+                text_parts.extend(['mystery', 'surprise', 'gift box', 'surprise box',
+                                   'gift for her', 'gift for girlfriend', 'gift for wife',
+                                   'gift for mom', 'gift for mother', 'gift for sister',
+                                   'gift for female', 'gift for woman', 'gift for girl',
+                                   'birthday gift for her'])
+            elif 'mystery' in name_lower and 'him' in name_lower:
+                text_parts.extend(['mystery', 'surprise', 'gift box', 'surprise box',
+                                   'gift for him', 'gift for boyfriend', 'gift for husband',
+                                   'gift for dad', 'gift for father', 'gift for brother',
+                                   'gift for male', 'gift for man', 'gift for boy',
+                                   'birthday gift for him'])
             if 'hamper' in name_lower:
-                text_parts.extend(['hamper', 'gift hamper', 'gift basket', 'collection'])
+                text_parts.extend(['hamper', 'gift hamper', 'gift basket', 'collection',
+                                   'gift for anyone', 'gift for mom', 'gift for mother',
+                                   'gift for girlfriend', 'gift for boyfriend',
+                                   'gift for best friend', 'gift for parents',
+                                   'birthday gift', 'anniversary gift'])
             if 'combo' in name_lower:
                 text_parts.extend(['combo', 'bundle', 'deal', 'package', 'value', 'save'])
             if 'polaroid' in name_lower:
-                text_parts.extend(['polaroid', 'photos', 'prints', 'photo prints'])
+                text_parts.extend(['polaroid', 'photos', 'prints', 'photo prints',
+                                   'gift for mom', 'gift for girlfriend', 'gift for friend',
+                                   'gift for her', 'gift for him', 'birthday gift'])
             if 'calendar' in name_lower:
-                text_parts.extend(['calendar', 'dates', 'months', 'year', 'wall calendar'])
+                text_parts.extend(['calendar', 'dates', 'months', 'year', 'wall calendar',
+                                   'gift for mom', 'gift for mother', 'gift for parents',
+                                   'gift for dad', 'gift for father'])
             if 'scrapbook' in name_lower:
-                text_parts.extend(['scrapbook', 'memory', 'memories', 'diary', 'journal'])
+                text_parts.extend(['scrapbook', 'memory', 'memories', 'diary', 'journal',
+                                   'gift for mom', 'gift for mother', 'gift for girlfriend',
+                                   'gift for best friend', 'gift for wife',
+                                   'birthday gift', 'anniversary gift'])
             if 'action' in name_lower:
-                text_parts.extend(['action figure', 'toy', 'figurine', 'bricks', 'lego'])
+                text_parts.extend(['action figure', 'toy', 'figurine', 'bricks', 'lego',
+                                   'gift for him', 'gift for boyfriend', 'gift for boy',
+                                   'gift for brother', 'fun gift'])
             if 'song' in name_lower:
-                text_parts.extend(['song', 'music', 'spotify', 'playlist'])
+                text_parts.extend(['song', 'music', 'spotify', 'playlist',
+                                   'gift for girlfriend', 'gift for boyfriend',
+                                   'romantic gift', 'valentine gift', 'anniversary gift'])
 
             # Add gift-related keywords for all products
             text_parts.extend(['gift', 'customised', 'personalised', 'handcrafted'])
